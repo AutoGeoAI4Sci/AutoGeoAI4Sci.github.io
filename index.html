@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutonomousGeoAI4Science</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060914;
+    --bg2: #0c1122;
+    --cyan: #00d4ff;
+    --purple: #7c3aed;
+    --green: #00ff88;
+    --orange: #ff6b35;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --card: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── CANVAS BACKGROUND ── */
+  #cosmos { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(6,9,20,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--cyan);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    padding: 0.45rem 1.2rem;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    color: #fff; border-radius: 6px; font-size: 0.8rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+  }
+  .hero-inner { max-width: 900px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 100px;
+    font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;
+    color: var(--cyan); letter-spacing: 0.08em;
+    background: rgba(0,212,255,0.06);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse-dot 2s infinite;
+  }
+  @keyframes pulse-dot {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 .line1 { display: block; color: var(--text); }
+  .hero h1 .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--green) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem; color: var(--muted); line-height: 1.7;
+    max-width: 640px; margin: 0 auto 2.5rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .btn-primary {
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    color: #fff; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.02em;
+    box-shadow: 0 0 30px rgba(0,212,255,0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px rgba(0,212,255,0.4);
+  }
+  .btn-outline {
+    padding: 0.8rem 2rem;
+    border: 1px solid var(--border);
+    color: var(--text); border-radius: 8px; font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; background: var(--card);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover {
+    border-color: rgba(0,212,255,0.4);
+    background: rgba(0,212,255,0.05);
+  }
+
+  /* ── STATS ── */
+  .stats-bar {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+    backdrop-filter: blur(10px);
+    flex-wrap: wrap;
+  }
+  .stat {
+    flex: 1; min-width: 150px; max-width: 220px;
+    padding: 2rem 1.5rem; text-align: center;
+    border-right: 1px solid var(--border);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .stat:last-child { border-right: none; }
+  .stat.visible { opacity: 1; transform: none; }
+  .stat-num {
+    font-size: 2.2rem; font-weight: 700;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .stat-label { color: var(--muted); font-size: 0.8rem; letter-spacing: 0.05em; margin-top: 0.25rem; }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  .section-header {
+    text-align: center; margin-bottom: 3rem;
+  }
+  .section-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--cyan); padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(0,212,255,0.25); border-radius: 4px;
+    background: rgba(0,212,255,0.06);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700; line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .section-sub { color: var(--muted); margin-top: 0.75rem; font-size: 1rem; }
+
+  /* ── FOCUS AREAS ── */
+  .focus { padding: 6rem 2rem; }
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5px;
+    max-width: 1100px; margin: 0 auto;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .focus-card {
+    background: var(--bg);
+    padding: 2rem;
+    transition: background 0.3s;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
+  }
+  .focus-card.visible { opacity: 1; transform: none; }
+  .focus-card:hover { background: var(--bg2); }
+  .focus-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 1rem;
+  }
+  .focus-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .focus-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.6; }
+
+  /* ── REPOS ── */
+  .repos { padding: 6rem 2rem; background: var(--bg2); }
+  .tabs {
+    display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .tab {
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: transparent; color: var(--muted);
+    cursor: pointer; font-size: 0.8rem; font-family: inherit;
+    font-weight: 500; letter-spacing: 0.03em;
+    transition: all 0.2s;
+  }
+  .tab:hover { border-color: rgba(0,212,255,0.3); color: var(--text); }
+  .tab.active {
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    border-color: transparent; color: #fff;
+  }
+
+  .repo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .repo-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none; color: var(--text);
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    display: flex; flex-direction: column;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s, box-shadow 0.2s;
+  }
+  .repo-card.visible { opacity: 1; transform: none; }
+  .repo-card:hover {
+    border-color: rgba(0,212,255,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(0,212,255,0.08);
+  }
+  .repo-card-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+  .repo-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 500;
+  }
+  .type-paper  { background: rgba(124,58,237,0.15); color: #a78bfa; border: 1px solid rgba(124,58,237,0.25); }
+  .type-tutorial { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
+  .type-project { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+  .type-tool { background: rgba(255,107,53,0.1); color: var(--orange); border: 1px solid rgba(255,107,53,0.2); }
+  .type-resource { background: rgba(255,200,0,0.1); color: #fbbf24; border: 1px solid rgba(255,200,0,0.2); }
+
+  .repo-stars { display: flex; align-items: center; gap: 0.3rem; color: var(--muted); font-size: 0.78rem; }
+  .repo-stars svg { width: 12px; height: 12px; fill: #fbbf24; }
+  .repo-name { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; color: var(--text); }
+  .repo-desc { color: var(--muted); font-size: 0.82rem; line-height: 1.6; flex: 1; }
+  .repo-footer {
+    margin-top: 1rem; padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .repo-lang { font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
+  .lang-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .repo-arrow { color: var(--muted); font-size: 0.8rem; transition: color 0.2s, transform 0.2s; }
+  .repo-card:hover .repo-arrow { color: var(--cyan); transform: translateX(4px); }
+
+  /* ── AWESOME LIST SECTION ── */
+  .awesome { padding: 6rem 2rem; }
+  .awesome-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+  }
+  @media (max-width: 768px) { .awesome-inner { grid-template-columns: 1fr; } }
+  .awesome-text h2 {
+    font-size: 2.2rem; font-weight: 700; line-height: 1.2;
+    letter-spacing: -0.02em; margin-bottom: 1rem;
+  }
+  .awesome-text p { color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .awesome-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .tag {
+    padding: 0.3rem 0.75rem; border-radius: 100px;
+    border: 1px solid var(--border); font-size: 0.75rem; color: var(--muted);
+    background: var(--card);
+  }
+  .awesome-list-visual {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+    line-height: 2;
+  }
+  .al-header { color: var(--muted); margin-bottom: 1rem; font-size: 0.7rem; letter-spacing: 0.1em; }
+  .al-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.3rem 0; }
+  .al-bullet { color: var(--cyan); }
+  .al-cat { color: var(--text); font-weight: 500; }
+  .al-count { color: var(--muted); margin-left: auto; }
+
+  /* ── GLOBE SECTION ── */
+  .globe-section {
+    padding: 5rem 2rem;
+    background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+    text-align: center;
+  }
+  .globe-container {
+    position: relative; display: inline-block;
+    width: 300px; height: 300px; margin: 3rem auto;
+  }
+  .globe-ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid;
+    animation: spin linear infinite;
+  }
+  .ring1 {
+    inset: 0;
+    border-color: rgba(0,212,255,0.2);
+    animation-duration: 20s;
+  }
+  .ring2 {
+    inset: 20px;
+    border-color: rgba(124,58,237,0.25);
+    animation-duration: 15s;
+    animation-direction: reverse;
+    transform-origin: center;
+  }
+  .ring3 {
+    inset: 50px;
+    border-color: rgba(0,255,136,0.2);
+    animation-duration: 10s;
+  }
+  .globe-core {
+    position: absolute;
+    inset: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(0,212,255,0.4) 0%, rgba(124,58,237,0.3) 50%, rgba(0,0,0,0.8) 100%);
+    box-shadow: 0 0 60px rgba(0,212,255,0.2), inset 0 0 40px rgba(0,0,0,0.5);
+  }
+  .globe-dot {
+    position: absolute; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
+    animation: orbit 8s linear infinite;
+  }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes orbit {
+    from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+  }
+  @keyframes orbit2 {
+    from { transform: rotate(90deg) translateX(80px) rotate(-90deg); }
+    to { transform: rotate(450deg) translateX(80px) rotate(-450deg); }
+  }
+  .globe-dot2 {
+    position: absolute; width: 4px; height: 4px;
+    border-radius: 50%; background: var(--purple);
+    box-shadow: 0 0 8px var(--purple);
+    top: 50%; left: 50%; margin: -2px;
+    animation: orbit2 5s linear infinite;
+  }
+
+  /* ── MISSION QUOTE ── */
+  .mission { padding: 6rem 2rem; }
+  .mission-card {
+    max-width: 860px; margin: 0 auto;
+    background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(124,58,237,0.05));
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 20px; padding: 3.5rem;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .mission-card::before {
+    content: '"';
+    position: absolute; top: -0.5rem; left: 2rem;
+    font-size: 10rem; font-weight: 900; line-height: 1;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; opacity: 0.15;
+    font-family: Georgia, serif;
+  }
+  .mission-quote {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    line-height: 1.7; font-weight: 400; color: var(--text);
+    margin-bottom: 1.5rem; position: relative;
+  }
+  .mission-quote em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; font-weight: 600;
+  }
+  .mission-attr { color: var(--muted); font-size: 0.85rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+    background: var(--bg);
+  }
+  .footer-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem; color: var(--cyan); margin-bottom: 1rem;
+  }
+  .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+  .footer-copy { color: var(--muted); font-size: 0.78rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── GLOW DIVIDER ── */
+  .glow-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), transparent);
+    opacity: 0.3; margin: 0;
+  }
+
+  /* ── HIDDEN UTIL ── */
+  .hidden-tab { display: none; }
+</style>
+</head>
+<body>
+
+<canvas id="cosmos"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AutoGeoAI4Sci</div>
+  <div class="nav-links">
+    <a href="#focus">Focus</a>
+    <a href="#repos">Repos</a>
+    <a href="#awesome">Resources</a>
+    <a href="#mission">Mission</a>
+  </div>
+  <a class="nav-cta" href="https://github.com/AutoGeoAI4Sci" target="_blank">GitHub ↗</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Open Research Community · Est. 2026
+    </div>
+    <h1>
+      <span class="line1">Autonomous GeoAI</span>
+      <span class="line2">for Science</span>
+    </h1>
+    <p class="hero-sub">
+      Advancing AI systems that can perceive, reason, and act in complex Earth and environmental systems — through open tutorials, research code, papers, and community tools.
+    </p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="https://github.com/AutoGeoAI4Sci" target="_blank">Explore on GitHub</a>
+      <a class="btn-outline" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank">Awesome List ★7</a>
+      <a class="btn-outline" href="https://rayford295.github.io/" target="_blank">Blog ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">28</div><div class="stat-label">Public Repos</div></div>
+  <div class="stat"><div class="stat-num">24</div><div class="stat-label">Followers</div></div>
+  <div class="stat"><div class="stat-num">7★</div><div class="stat-label">Awesome List</div></div>
+  <div class="stat"><div class="stat-num">6</div><div class="stat-label">Focus Areas</div></div>
+  <div class="stat"><div class="stat-num">MIT</div><div class="stat-label">Open License</div></div>
+</div>
+
+<div class="glow-line"></div>
+
+<!-- FOCUS AREAS -->
+<section class="focus" id="focus">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-header">
+      <div class="section-tag">Research Focus</div>
+      <h2 class="section-title">Six Core Pillars</h2>
+      <p class="section-sub">The thematic areas that define our work at the frontier of GeoAI</p>
+    </div>
+    <div class="focus-grid">
+      <div class="focus-card">
+        <div class="focus-icon" style="background:rgba(0,212,255,0.1)">🛰️</div>
+        <h3>Autonomous GeoAI & AI4Science</h3>
+        <p>Building agent-based systems that can autonomously process, reason, and act on geospatial data to advance scientific discovery.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon" style="background:rgba(124,58,237,0.1)">🌍</div>
+        <h3>Foundation Models for Earth Observation</h3>
+        <p>Adapting and evaluating large pretrained models for satellite imagery, land cover mapping, and environmental monitoring tasks.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon" style="background:rgba(0,255,136,0.1)">🗺️</div>
+        <h3>Multimodal Spatial Reasoning</h3>
+        <p>Fusing satellite imagery, street-view photos, maps, and temporal sequences for richer geospatial understanding.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon" style="background:rgba(255,107,53,0.1)">🔬</div>
+        <h3>GIScience & Spatial Intelligence</h3>
+        <p>Advancing spatial thinking through GWR, spatial query, and AI-augmented geographic information systems.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon" style="background:rgba(0,212,255,0.1)">🏙️</div>
+        <h3>Urban & Disaster Intelligence</h3>
+        <p>Street-view AI for damage assessment, urban building analytics, and human-centric sensing of built environments.</p>
+      </div>
+      <div class="focus-card">
+        <div class="focus-icon" style="background:rgba(255,200,0,0.1)">⚖️</div>
+        <h3>Explainable & Responsible GeoAI</h3>
+        <p>Open science practices, reproducibility, and trustworthy deployment of AI systems for spatial and environmental applications.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- REPOS -->
+<section class="repos" id="repos">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-header">
+      <div class="section-tag">Open Source</div>
+      <h2 class="section-title">Repository Ecosystem</h2>
+      <p class="section-sub">28 repositories spanning papers, tutorials, projects, and tools</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="filterRepos('all',this)">All</button>
+      <button class="tab" onclick="filterRepos('paper',this)">Papers</button>
+      <button class="tab" onclick="filterRepos('tutorial',this)">Tutorials</button>
+      <button class="tab" onclick="filterRepos('project',this)">Projects</button>
+      <button class="tab" onclick="filterRepos('tool',this)">Tools</button>
+      <button class="tab" onclick="filterRepos('resource',this)">Resources</button>
+    </div>
+
+    <div class="repo-grid" id="repoGrid">
+
+      <!-- PAPERS -->
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Dataset_skydiffusion" target="_blank" data-type="paper">
+        <div class="repo-card-header">
+          <span class="repo-type type-paper">Paper · ICCV 2025</span>
+          <span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> Featured</span>
+        </div>
+        <div class="repo-name">Street-to-Satellite Diffusion</div>
+        <div class="repo-desc">Official implementation of "Street-to-Satellite Image Synthesis with Diffusion Models and BEV Paradigm" — accepted at ICCV 2025.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#ee4d28"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Paper_BuildingView" target="_blank" data-type="paper">
+        <div class="repo-card-header">
+          <span class="repo-type type-paper">Paper</span>
+        </div>
+        <div class="repo-name">BuildingView</div>
+        <div class="repo-desc">Integrates Google Street View and OpenStreetMap to create precise urban building exterior databases, focused on energy efficiency and sustainability.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#ee4d28"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Paper_GeoLocator" target="_blank" data-type="paper">
+        <div class="repo-card-header">
+          <span class="repo-type type-paper">Paper</span>
+        </div>
+        <div class="repo-name">GeoLocator</div>
+        <div class="repo-desc">A Location-Integrated Large Multimodal Model (LMM) for inferring geo-privacy from visual content.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Paper_Bi-Temporal-StreetView" target="_blank" data-type="paper">
+        <div class="repo-card-header">
+          <span class="repo-type type-paper">Paper</span>
+        </div>
+        <div class="repo-name">Bi-Temporal Street View Damage</div>
+        <div class="repo-desc">Hyperlocal disaster damage assessment using bi-temporal street-view imagery and pre-trained vision models.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Paper_DisasterVLP" target="_blank" data-type="paper">
+        <div class="repo-card-header">
+          <span class="repo-type type-paper">Paper · ICA 2025</span>
+        </div>
+        <div class="repo-name">DisasterVLP</div>
+        <div class="repo-desc">Perceiving multidimensional disaster damages from street-view images using Visual-Language Models. Published in ICA Abstracts, 2025.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Paper_rs-embed" target="_blank" data-type="paper">
+        <div class="repo-card-header">
+          <span class="repo-type type-paper">Paper</span>
+        </div>
+        <div class="repo-name">RS-Embed</div>
+        <div class="repo-desc">Integrating Remote Sensing Foundation Models — a framework for embedding and benchmarking pretrained models on satellite imagery.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- TUTORIALS -->
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_DeepLabV3Plus_for_SatelliteImage-OpenEarthMap" target="_blank" data-type="tutorial">
+        <div class="repo-card-header">
+          <span class="repo-type type-tutorial">Tutorial</span>
+        </div>
+        <div class="repo-name">DeepLabV3+ for Satellite Images</div>
+        <div class="repo-desc">High-resolution land cover mapping on OpenEarthMap — 5000 images, 8-class annotations across 97 regions from 44 countries.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#F37626"></span>Jupyter</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_Geographically-Weighted-Regression" target="_blank" data-type="tutorial">
+        <div class="repo-card-header">
+          <span class="repo-type type-tutorial">Tutorial · TAMU GEOG 475</span>
+        </div>
+        <div class="repo-name">Geographically Weighted Regression</div>
+        <div class="repo-desc">Guest lecture materials for Advanced GIS introducing GWR — spatial non-stationarity in regression models.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#F37626"></span>Jupyter</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_SpatialQueryLab" target="_blank" data-type="tutorial">
+        <div class="repo-card-header">
+          <span class="repo-type type-tutorial">Tutorial</span>
+        </div>
+        <div class="repo-name">Spatial Query Lab</div>
+        <div class="repo-desc">Interactive geospatial database and SQL learning environment. Integrates ArcGIS FeatureServer and Supabase/PostGIS for real data exploration.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_streetview-google-panorama" target="_blank" data-type="tutorial">
+        <div class="repo-card-header">
+          <span class="repo-type type-tutorial">Tutorial</span>
+        </div>
+        <div class="repo-name">Google Street View Panoramas</div>
+        <div class="repo-desc">Download high-resolution Google Street View panoramas from the command line with parallel downloads and rich terminal output.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_Foursquare2ArcGIS" target="_blank" data-type="tutorial">
+        <div class="repo-card-header">
+          <span class="repo-type type-tutorial">Tutorial</span>
+        </div>
+        <div class="repo-name">Foursquare 104M POI → ArcGIS</div>
+        <div class="repo-desc">Converting Foursquare's 104M+ POI dataset from GeoJSON to Shapefile for easy use in ArcGIS Pro.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_LLM-Geo" target="_blank" data-type="tutorial">
+        <div class="repo-card-header">
+          <span class="repo-type type-tutorial">Tutorial</span>
+        </div>
+        <div class="repo-name">LLM-Geo</div>
+        <div class="repo-desc">Exploring the intersection of Large Language Models and geospatial analysis — code, prompts, and experiments.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#F37626"></span>Jupyter</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_human-perception-place-pulse" target="_blank" data-type="tutorial">
+        <div class="repo-card-header">
+          <span class="repo-type type-tutorial">Tutorial</span>
+        </div>
+        <div class="repo-name">Human Perception of Place</div>
+        <div class="repo-desc">Getting human perception scores from street-level imagery using the Place Pulse dataset and deep learning.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- PROJECTS -->
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Project_GeoGuessr" target="_blank" data-type="project">
+        <div class="repo-card-header">
+          <span class="repo-type type-project">Project</span>
+        </div>
+        <div class="repo-name">Project GeoGuessr</div>
+        <div class="repo-desc">Adapted VLM-Gym for GeoAI research — building visual language model environments for geographic location reasoning.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Project_MapTrace" target="_blank" data-type="project">
+        <div class="repo-card-header">
+          <span class="repo-type type-project">Project</span>
+        </div>
+        <div class="repo-name">MapTrace</div>
+        <div class="repo-desc">Active R&D project under the AutonomousGeoAI4Science initiative. Exploring automated map interpretation and tracing.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- TOOLS -->
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tool_freephdlabor" target="_blank" data-type="tool">
+        <div class="repo-card-header">
+          <span class="repo-type type-tool">Tool</span>
+        </div>
+        <div class="repo-name">freephdlabor</div>
+        <div class="repo-desc">Customizable personalized multi-agent systems that research 24/7 on your own scientific problem — autonomous AI research assistants.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tool_Offeropenclaw" target="_blank" data-type="tool">
+        <div class="repo-card-header">
+          <span class="repo-type type-tool">Tool</span>
+        </div>
+        <div class="repo-name">Offeropenclaw</div>
+        <div class="repo-desc">An open-source tool for automating and scaling geospatial AI workflows within the AutonomousGeoAI4Science ecosystem.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- RESOURCES -->
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" data-type="resource">
+        <div class="repo-card-header">
+          <span class="repo-type type-resource">Resource</span>
+          <span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> 7</span>
+        </div>
+        <div class="repo-name">Awesome Autonomous GeoAI</div>
+        <div class="repo-desc">Curated list of resources — books, conferences, research groups, datasets, software, and funding for autonomous GeoAI.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#e34c26"></span>Markdown</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/papers" target="_blank" data-type="resource">
+        <div class="repo-card-header">
+          <span class="repo-type type-resource">Resource</span>
+          <span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> 1</span>
+        </div>
+        <div class="repo-name">Papers Index</div>
+        <div class="repo-desc">Curated index of papers, reproducible artifacts, and experiment references across all AutonomousGeoAI4Science research.</div>
+        <div class="repo-footer">
+          <span class="repo-lang"><span class="lang-dot" style="background:#e34c26"></span>Markdown</span>
+          <span class="repo-arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- AWESOME LIST SECTION -->
+<section class="awesome" id="awesome">
+  <div class="awesome-inner">
+    <div class="awesome-text">
+      <div class="section-tag">Community Resource</div>
+      <h2>Awesome Autonomous GeoAI <span style="color:var(--green)">★7</span></h2>
+      <p>A living, curated list of the best tools, datasets, papers, research groups, courses, and funding opportunities at the intersection of autonomous AI and geospatial science.</p>
+      <div class="awesome-tags">
+        <span class="tag">Books</span>
+        <span class="tag">Conferences</span>
+        <span class="tag">Research Groups</span>
+        <span class="tag">Journals</span>
+        <span class="tag">Software</span>
+        <span class="tag">Internships</span>
+        <span class="tag">Funding</span>
+        <span class="tag">Education</span>
+        <span class="tag">Datasets</span>
+        <span class="tag">Foundation Models</span>
+      </div>
+      <a class="btn-primary" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" style="display:inline-block">Browse the List ↗</a>
+    </div>
+    <div class="awesome-list-visual">
+      <div class="al-header"># awesome-autonomous-geoai</div>
+      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">📚 Books & Textbooks</span><span class="al-count" style="color:var(--cyan)">GeoAI, RS</span></div>
+      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">🏛️ Research Groups</span><span class="al-count" style="color:var(--purple)">UCSB, UW, TAMU</span></div>
+      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">🎓 Conferences</span><span class="al-count" style="color:var(--green)">CVPR, NeurIPS, SIGSPATIAL</span></div>
+      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">📰 Journals</span><span class="al-count" style="color:var(--cyan)">IJGIS, RSEnv, IEEE TGRS</span></div>
+      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">🛠️ Software Tools</span><span class="al-count" style="color:var(--orange)">GeoPandas, GEE, QGIS</span></div>
+      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">💼 Internships</span><span class="al-count" style="color:var(--purple)">Esri, Planet, Niantic</span></div>
+      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">💰 Funding</span><span class="al-count" style="color:var(--green)">NSF, Google.org, NVIDIA</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBE + MISSION -->
+<section class="globe-section">
+  <div class="section-tag">Where We're Going</div>
+  <div class="globe-container">
+    <div class="globe-ring ring1"></div>
+    <div class="globe-ring ring2"></div>
+    <div class="globe-ring ring3"></div>
+    <div class="globe-core"></div>
+    <div class="globe-dot"></div>
+    <div class="globe-dot2"></div>
+  </div>
+</section>
+
+<section class="mission" id="mission">
+  <div class="mission-card">
+    <p class="mission-quote">
+      We build <em>AI systems that can perceive, reason, and act</em> in complex Earth and environmental systems with minimal human intervention — bringing together tutorials, open-source code, research projects, and papers at the frontier of <em>autonomous geospatial intelligence</em>.
+    </p>
+    <p class="mission-attr">— AutonomousGeoAI4Science Mission · United States of America</p>
+    <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a class="btn-primary" href="https://github.com/AutoGeoAI4Sci" target="_blank">Join the Community</a>
+      <a class="btn-outline" href="mailto:yyf990925@gmail.com">Contact ↗</a>
+    </div>
+  </div>
+</section>
+
+<div class="glow-line"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AutoGeoAI4Sci</div>
+  <div class="footer-links">
+    <a href="https://github.com/AutoGeoAI4Sci" target="_blank">GitHub</a>
+    <a href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank">Awesome List</a>
+    <a href="https://github.com/AutoGeoAI4Sci/tutorials" target="_blank">Tutorials</a>
+    <a href="https://github.com/AutoGeoAI4Sci/papers" target="_blank">Papers</a>
+    <a href="https://rayford295.github.io/" target="_blank">Blog</a>
+    <a href="mailto:yyf990925@gmail.com">Contact</a>
+  </div>
+  <p class="footer-copy">MIT License · AutonomousGeoAI4Science · Open Research Community</p>
+</footer>
+
+<script>
+// ── COSMOS CANVAS ──
+const canvas = document.getElementById('cosmos');
+const ctx = canvas.getContext('2d');
+let W, H, stars = [], connections = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Generate stars
+for (let i = 0; i < 180; i++) {
+  stars.push({
+    x: Math.random(), y: Math.random(),
+    r: Math.random() * 1.2 + 0.2,
+    a: Math.random(),
+    da: (Math.random() - 0.5) * 0.003,
+    vx: (Math.random() - 0.5) * 0.00008,
+    vy: (Math.random() - 0.5) * 0.00008,
+  });
+}
+
+// Shooting star
+let shooters = [];
+function spawnShooter() {
+  shooters.push({
+    x: Math.random(), y: Math.random() * 0.5,
+    vx: 0.003 + Math.random() * 0.003,
+    vy: 0.001 + Math.random() * 0.002,
+    life: 1, trail: [],
+  });
+  setTimeout(spawnShooter, 4000 + Math.random() * 8000);
+}
+setTimeout(spawnShooter, 2000);
+
+function drawCosmos(t) {
+  ctx.clearRect(0, 0, W, H);
+
+  // Draw connections between nearby stars
+  ctx.strokeStyle = 'rgba(0,212,255,0.03)';
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i < stars.length; i++) {
+    for (let j = i + 1; j < stars.length; j++) {
+      const dx = (stars[i].x - stars[j].x) * W;
+      const dy = (stars[i].y - stars[j].y) * H;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 120) {
+        ctx.globalAlpha = (1 - d/120) * 0.15;
+        ctx.beginPath();
+        ctx.moveTo(stars[i].x * W, stars[i].y * H);
+        ctx.lineTo(stars[j].x * W, stars[j].y * H);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Draw stars
+  for (const s of stars) {
+    s.a += s.da;
+    if (s.a < 0.1 || s.a > 1) s.da *= -1;
+    s.x += s.vx; s.y += s.vy;
+    if (s.x < 0) s.x = 1; if (s.x > 1) s.x = 0;
+    if (s.y < 0) s.y = 1; if (s.y > 1) s.y = 0;
+    ctx.globalAlpha = s.a * 0.8;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Draw shooters
+  for (let i = shooters.length - 1; i >= 0; i--) {
+    const s = shooters[i];
+    s.trail.push({x: s.x, y: s.y});
+    if (s.trail.length > 20) s.trail.shift();
+    s.x += s.vx; s.y += s.vy; s.life -= 0.012;
+    if (s.life <= 0 || s.x > 1.1 || s.y > 1.1) { shooters.splice(i, 1); continue; }
+    ctx.globalAlpha = s.life * 0.8;
+    const grad = ctx.createLinearGradient(
+      s.trail[0]?.x * W || s.x * W, s.trail[0]?.y * H || s.y * H,
+      s.x * W, s.y * H
+    );
+    grad.addColorStop(0, 'transparent');
+    grad.addColorStop(1, '#00d4ff');
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let j = 0; j < s.trail.length; j++) {
+      j === 0 ? ctx.moveTo(s.trail[j].x * W, s.trail[j].y * H)
+              : ctx.lineTo(s.trail[j].x * W, s.trail[j].y * H);
+    }
+    ctx.stroke();
+  }
+
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(drawCosmos);
+}
+requestAnimationFrame(drawCosmos);
+
+// ── SCROLL ANIMATIONS ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.stat, .focus-card, .repo-card').forEach((el, i) => {
+  el.style.transitionDelay = `${(i % 6) * 0.07}s`;
+  observer.observe(el);
+});
+
+// ── REPO FILTER ──
+function filterRepos(type, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.repo-card').forEach(card => {
+    if (type === 'all' || card.dataset.type === type) {
+      card.style.display = 'flex';
+      // Re-trigger animation
+      card.classList.remove('visible');
+      setTimeout(() => card.classList.add('visible'), 50);
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// ── TYPEWRITER effect for hero ──
+const heroLine2 = document.querySelector('.hero h1 .line2');
+const text = 'for Science';
+let idx = 0;
+heroLine2.textContent = '';
+function type() {
+  if (idx < text.length) {
+    heroLine2.textContent += text[idx++];
+    setTimeout(type, 80);
+  }
+}
+setTimeout(type, 600);
+</script>
+</body>
+</html>
