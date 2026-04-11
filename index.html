@@ -498,7 +498,7 @@
     </p>
     <div class="hero-btns">
       <a class="btn-primary" href="https://github.com/AutoGeoAI4Sci" target="_blank">Explore on GitHub</a>
-      <a class="btn-outline" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank">Awesome List ★7</a>
+      <a class="btn-outline" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" id="btn-awesome">Awesome List ★7</a>
       <a class="btn-outline" href="https://rayford295.github.io/" target="_blank">Blog ↗</a>
     </div>
   </div>
@@ -506,9 +506,9 @@
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat"><div class="stat-num">28</div><div class="stat-label">Public Repos</div></div>
-  <div class="stat"><div class="stat-num">24</div><div class="stat-label">Followers</div></div>
-  <div class="stat"><div class="stat-num">7★</div><div class="stat-label">Awesome List</div></div>
+  <div class="stat"><div class="stat-num" id="stat-repos">28</div><div class="stat-label">Public Repos</div></div>
+  <div class="stat"><div class="stat-num" id="stat-followers">24</div><div class="stat-label">Followers</div></div>
+  <div class="stat"><div class="stat-num" id="stat-awesome-stars">7★</div><div class="stat-label">Awesome List</div></div>
   <div class="stat"><div class="stat-num">6</div><div class="stat-label">Focus Areas</div></div>
   <div class="stat"><div class="stat-num">MIT</div><div class="stat-label">Open License</div></div>
 </div>
@@ -793,7 +793,7 @@
       <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" data-type="resource">
         <div class="repo-card-header">
           <span class="repo-type type-resource">Resource</span>
-          <span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> 7</span>
+          <span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> <span id="card-awesome-stars">7</span></span>
         </div>
         <div class="repo-name">Awesome Autonomous GeoAI</div>
         <div class="repo-desc">Curated list of resources — books, conferences, research groups, datasets, software, and funding for autonomous GeoAI.</div>
@@ -806,7 +806,7 @@
       <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/papers" target="_blank" data-type="resource">
         <div class="repo-card-header">
           <span class="repo-type type-resource">Resource</span>
-          <span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> 1</span>
+          <span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> <span id="card-papers-stars">1</span></span>
         </div>
         <div class="repo-name">Papers Index</div>
         <div class="repo-desc">Curated index of papers, reproducible artifacts, and experiment references across all AutonomousGeoAI4Science research.</div>
@@ -827,7 +827,7 @@
   <div class="awesome-inner">
     <div class="awesome-text">
       <div class="section-tag">Community Resource</div>
-      <h2>Awesome Autonomous GeoAI <span style="color:var(--green)">★7</span></h2>
+      <h2>Awesome Autonomous GeoAI <span style="color:var(--green)" id="section-awesome-stars">★7</span></h2>
       <p>A living, curated list of the best tools, datasets, papers, research groups, courses, and funding opportunities at the intersection of autonomous AI and geospatial science.</p>
       <div class="awesome-tags">
         <span class="tag">Books</span>
@@ -1029,6 +1029,40 @@ function filterRepos(type, btn) {
     }
   });
 }
+
+// ── GITHUB LIVE STATS ──
+async function fetchGitHubStats() {
+  try {
+    const [orgRes, awesomeRes, papersRes] = await Promise.all([
+      fetch('https://api.github.com/orgs/AutoGeoAI4Sci'),
+      fetch('https://api.github.com/repos/AutoGeoAI4Sci/awesome-autonomous-geoai'),
+      fetch('https://api.github.com/repos/AutoGeoAI4Sci/papers'),
+    ]);
+    if (orgRes.ok) {
+      const org = await orgRes.json();
+      document.getElementById('stat-repos').textContent = org.public_repos;
+      document.getElementById('stat-followers').textContent = org.followers;
+      // Update section subtitle
+      const subEl = document.querySelector('.repos .section-sub');
+      if (subEl) subEl.textContent = org.public_repos + ' repositories spanning papers, tutorials, projects, and tools';
+    }
+    if (awesomeRes.ok) {
+      const repo = await awesomeRes.json();
+      const s = repo.stargazers_count;
+      document.getElementById('stat-awesome-stars').textContent = s + '★';
+      document.getElementById('btn-awesome').textContent = 'Awesome List ★' + s;
+      document.getElementById('section-awesome-stars').textContent = '★' + s;
+      document.getElementById('card-awesome-stars').textContent = s;
+    }
+    if (papersRes.ok) {
+      const repo = await papersRes.json();
+      document.getElementById('card-papers-stars').textContent = repo.stargazers_count;
+    }
+  } catch (e) {
+    // Silently keep fallback values if API fails
+  }
+}
+fetchGitHubStats();
 
 // ── TYPEWRITER effect for hero ──
 const heroLine2 = document.querySelector('.hero h1 .line2');
