@@ -14,7 +14,25 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AutonomousGeoAI4Science">
 <meta name="twitter:description" content="Autonomous GeoAI for Science — open research community for GeoAI, disaster intelligence, and AI4Science.">
+<meta property="og:image" content="https://autogeoai4sci.github.io/assets/og-image.jpg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="572">
+<meta name="twitter:image" content="https://autogeoai4sci.github.io/assets/og-image.jpg">
+<meta name="theme-color" content="#060914">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛰️</text></svg>">
 <link rel="canonical" href="https://autogeoai4sci.github.io/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "AutonomousGeoAI4Science",
+  "alternateName": "AutoGeoAI4Sci",
+  "url": "https://autogeoai4sci.github.io/",
+  "logo": "https://autogeoai4sci.github.io/assets/og-image.jpg",
+  "description": "An open research and learning community advancing autonomous geospatial AI — tutorials, research code, papers, and tools at the intersection of AI, GeoAI, and scientific discovery.",
+  "sameAs": ["https://github.com/AutoGeoAI4Sci"]
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -464,6 +482,18 @@
 
   /* ── HIDDEN UTIL ── */
   .hidden-tab { display: none; }
+
+  /* ── DYNAMIC REPO STATES ── */
+  .repo-loading, .repo-error {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+    padding: 3rem 1rem;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+  }
+  .repo-error a { color: var(--cyan); }
+  .type-dataset { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+  .repo-updated { font-size: 0.72rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
 </style>
 </head>
 <body>
@@ -498,7 +528,7 @@
     </p>
     <div class="hero-btns">
       <a class="btn-primary" href="https://github.com/AutoGeoAI4Sci" target="_blank">Explore on GitHub</a>
-      <a class="btn-outline" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" id="btn-awesome">Awesome List ★7</a>
+      <a class="btn-outline" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" id="btn-awesome">Awesome List ★14</a>
       <a class="btn-outline" href="https://rayford295.github.io/" target="_blank">Blog ↗</a>
     </div>
   </div>
@@ -506,9 +536,9 @@
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat"><div class="stat-num" id="stat-repos">28</div><div class="stat-label">Public Repos</div></div>
-  <div class="stat"><div class="stat-num" id="stat-followers">24</div><div class="stat-label">Followers</div></div>
-  <div class="stat"><div class="stat-num" id="stat-awesome-stars">7★</div><div class="stat-label">Awesome List</div></div>
+  <div class="stat"><div class="stat-num" id="stat-repos">56</div><div class="stat-label">Public Repos</div></div>
+  <div class="stat"><div class="stat-num" id="stat-followers">31</div><div class="stat-label">Followers</div></div>
+  <div class="stat"><div class="stat-num" id="stat-awesome-stars">14★</div><div class="stat-label">Awesome List</div></div>
   <div class="stat"><div class="stat-num">6</div><div class="stat-label">Focus Areas</div></div>
   <div class="stat"><div class="stat-num">MIT</div><div class="stat-label">Open License</div></div>
 </div>
@@ -566,7 +596,7 @@
     <div class="section-header">
       <div class="section-tag">Open Source</div>
       <h2 class="section-title">Repository Ecosystem</h2>
-      <p class="section-sub">28 repositories spanning papers, tutorials, projects, and tools</p>
+      <p class="section-sub">A live index of everything we build — fetched in real time from GitHub</p>
     </div>
 
     <div class="tabs">
@@ -579,243 +609,10 @@
     </div>
 
     <div class="repo-grid" id="repoGrid">
-
-      <!-- PAPERS -->
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Dataset_skydiffusion" target="_blank" data-type="paper">
-        <div class="repo-card-header">
-          <span class="repo-type type-paper">Paper · ICCV 2025</span>
-          <span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> Featured</span>
-        </div>
-        <div class="repo-name">Street-to-Satellite Diffusion</div>
-        <div class="repo-desc">Official implementation of "Street-to-Satellite Image Synthesis with Diffusion Models and BEV Paradigm" — accepted at ICCV 2025.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#ee4d28"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Paper_BuildingView" target="_blank" data-type="paper">
-        <div class="repo-card-header">
-          <span class="repo-type type-paper">Paper</span>
-        </div>
-        <div class="repo-name">BuildingView</div>
-        <div class="repo-desc">Integrates Google Street View and OpenStreetMap to create precise urban building exterior databases, focused on energy efficiency and sustainability.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#ee4d28"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Paper_GeoLocator" target="_blank" data-type="paper">
-        <div class="repo-card-header">
-          <span class="repo-type type-paper">Paper</span>
-        </div>
-        <div class="repo-name">GeoLocator</div>
-        <div class="repo-desc">A Location-Integrated Large Multimodal Model (LMM) for inferring geo-privacy from visual content.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Paper_Bi-Temporal-StreetView" target="_blank" data-type="paper">
-        <div class="repo-card-header">
-          <span class="repo-type type-paper">Paper</span>
-        </div>
-        <div class="repo-name">Bi-Temporal Street View Damage</div>
-        <div class="repo-desc">Hyperlocal disaster damage assessment using bi-temporal street-view imagery and pre-trained vision models.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Paper_DisasterVLP" target="_blank" data-type="paper">
-        <div class="repo-card-header">
-          <span class="repo-type type-paper">Paper · ICA 2025</span>
-        </div>
-        <div class="repo-name">DisasterVLP</div>
-        <div class="repo-desc">Perceiving multidimensional disaster damages from street-view images using Visual-Language Models. Published in ICA Abstracts, 2025.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Paper_rs-embed" target="_blank" data-type="paper">
-        <div class="repo-card-header">
-          <span class="repo-type type-paper">Paper</span>
-        </div>
-        <div class="repo-name">RS-Embed</div>
-        <div class="repo-desc">Integrating Remote Sensing Foundation Models — a framework for embedding and benchmarking pretrained models on satellite imagery.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- TUTORIALS -->
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_DeepLabV3Plus_for_SatelliteImage-OpenEarthMap" target="_blank" data-type="tutorial">
-        <div class="repo-card-header">
-          <span class="repo-type type-tutorial">Tutorial</span>
-        </div>
-        <div class="repo-name">DeepLabV3+ for Satellite Images</div>
-        <div class="repo-desc">High-resolution land cover mapping on OpenEarthMap — 5000 images, 8-class annotations across 97 regions from 44 countries.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#F37626"></span>Jupyter</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_Geographically-Weighted-Regression" target="_blank" data-type="tutorial">
-        <div class="repo-card-header">
-          <span class="repo-type type-tutorial">Tutorial · TAMU GEOG 475</span>
-        </div>
-        <div class="repo-name">Geographically Weighted Regression</div>
-        <div class="repo-desc">Guest lecture materials for Advanced GIS introducing GWR — spatial non-stationarity in regression models.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#F37626"></span>Jupyter</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_SpatialQueryLab" target="_blank" data-type="tutorial">
-        <div class="repo-card-header">
-          <span class="repo-type type-tutorial">Tutorial</span>
-        </div>
-        <div class="repo-name">Spatial Query Lab</div>
-        <div class="repo-desc">Interactive geospatial database and SQL learning environment. Integrates ArcGIS FeatureServer and Supabase/PostGIS for real data exploration.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_streetview-google-panorama" target="_blank" data-type="tutorial">
-        <div class="repo-card-header">
-          <span class="repo-type type-tutorial">Tutorial</span>
-        </div>
-        <div class="repo-name">Google Street View Panoramas</div>
-        <div class="repo-desc">Download high-resolution Google Street View panoramas from the command line with parallel downloads and rich terminal output.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_Foursquare2ArcGIS" target="_blank" data-type="tutorial">
-        <div class="repo-card-header">
-          <span class="repo-type type-tutorial">Tutorial</span>
-        </div>
-        <div class="repo-name">Foursquare 104M POI → ArcGIS</div>
-        <div class="repo-desc">Converting Foursquare's 104M+ POI dataset from GeoJSON to Shapefile for easy use in ArcGIS Pro.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_LLM-Geo" target="_blank" data-type="tutorial">
-        <div class="repo-card-header">
-          <span class="repo-type type-tutorial">Tutorial</span>
-        </div>
-        <div class="repo-name">LLM-Geo</div>
-        <div class="repo-desc">Exploring the intersection of Large Language Models and geospatial analysis — code, prompts, and experiments.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#F37626"></span>Jupyter</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tutorial_human-perception-place-pulse" target="_blank" data-type="tutorial">
-        <div class="repo-card-header">
-          <span class="repo-type type-tutorial">Tutorial</span>
-        </div>
-        <div class="repo-name">Human Perception of Place</div>
-        <div class="repo-desc">Getting human perception scores from street-level imagery using the Place Pulse dataset and deep learning.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- PROJECTS -->
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Project_GeoGuessr" target="_blank" data-type="project">
-        <div class="repo-card-header">
-          <span class="repo-type type-project">Project</span>
-        </div>
-        <div class="repo-name">Project GeoGuessr</div>
-        <div class="repo-desc">Adapted VLM-Gym for GeoAI research — building visual language model environments for geographic location reasoning.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Project_MapTrace" target="_blank" data-type="project">
-        <div class="repo-card-header">
-          <span class="repo-type type-project">Project</span>
-        </div>
-        <div class="repo-name">MapTrace</div>
-        <div class="repo-desc">Active R&D project under the AutonomousGeoAI4Science initiative. Exploring automated map interpretation and tracing.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- TOOLS -->
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tool_freephdlabor" target="_blank" data-type="tool">
-        <div class="repo-card-header">
-          <span class="repo-type type-tool">Tool</span>
-        </div>
-        <div class="repo-name">freephdlabor</div>
-        <div class="repo-desc">Customizable personalized multi-agent systems that research 24/7 on your own scientific problem — autonomous AI research assistants.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/Tool_Offeropenclaw" target="_blank" data-type="tool">
-        <div class="repo-card-header">
-          <span class="repo-type type-tool">Tool</span>
-        </div>
-        <div class="repo-name">Offeropenclaw</div>
-        <div class="repo-desc">An open-source tool for automating and scaling geospatial AI workflows within the AutonomousGeoAI4Science ecosystem.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <!-- RESOURCES -->
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" data-type="resource">
-        <div class="repo-card-header">
-          <span class="repo-type type-resource">Resource</span>
-          <span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> <span id="card-awesome-stars">7</span></span>
-        </div>
-        <div class="repo-name">Awesome Autonomous GeoAI</div>
-        <div class="repo-desc">Curated list of resources — books, conferences, research groups, datasets, software, and funding for autonomous GeoAI.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#e34c26"></span>Markdown</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
-      <a class="repo-card" href="https://github.com/AutoGeoAI4Sci/papers" target="_blank" data-type="resource">
-        <div class="repo-card-header">
-          <span class="repo-type type-resource">Resource</span>
-          <span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> <span id="card-papers-stars">1</span></span>
-        </div>
-        <div class="repo-name">Papers Index</div>
-        <div class="repo-desc">Curated index of papers, reproducible artifacts, and experiment references across all AutonomousGeoAI4Science research.</div>
-        <div class="repo-footer">
-          <span class="repo-lang"><span class="lang-dot" style="background:#e34c26"></span>Markdown</span>
-          <span class="repo-arrow">→</span>
-        </div>
-      </a>
-
+      <div class="repo-loading" id="repoLoading">
+        <span class="badge-dot"></span> Loading repositories live from GitHub…
+      </div>
+    </div>
     </div>
   </div>
 </section>
@@ -827,7 +624,7 @@
   <div class="awesome-inner">
     <div class="awesome-text">
       <div class="section-tag">Community Resource</div>
-      <h2>Awesome Autonomous GeoAI <span style="color:var(--green)" id="section-awesome-stars">★7</span></h2>
+      <h2>Awesome Autonomous GeoAI <span style="color:var(--green)" id="section-awesome-stars">★14</span></h2>
       <p>A living, curated list of the best tools, datasets, papers, research groups, courses, and funding opportunities at the intersection of autonomous AI and geospatial science.</p>
       <div class="awesome-tags">
         <span class="tag">Books</span>
@@ -1030,39 +827,173 @@ function filterRepos(type, btn) {
   });
 }
 
-// ── GITHUB LIVE STATS ──
-async function fetchGitHubStats() {
-  try {
-    const [orgRes, awesomeRes, papersRes] = await Promise.all([
-      fetch('https://api.github.com/orgs/AutoGeoAI4Sci'),
-      fetch('https://api.github.com/repos/AutoGeoAI4Sci/awesome-autonomous-geoai'),
-      fetch('https://api.github.com/repos/AutoGeoAI4Sci/papers'),
-    ]);
-    if (orgRes.ok) {
-      const org = await orgRes.json();
-      document.getElementById('stat-repos').textContent = org.public_repos;
-      document.getElementById('stat-followers').textContent = org.followers;
-      // Update section subtitle
-      const subEl = document.querySelector('.repos .section-sub');
-      if (subEl) subEl.textContent = org.public_repos + ' repositories spanning papers, tutorials, projects, and tools';
+// ── GITHUB LIVE DATA (stats + full repo grid) ──
+const GH_ORG = 'AutoGeoAI4Sci';
+const GH_CACHE_KEY = 'gh-live-v1';
+const GH_CACHE_TTL = 10 * 60 * 1000; // 10 min — stays well under the 60 req/h unauthenticated API limit
+
+// Repos hidden from the site: org meta repos, website repos, or anything tagged with the 'website-hide' topic
+function isHiddenRepo(r) {
+  const n = r.name.toLowerCase();
+  return n === '.github' || n.endsWith('.github.io') || (r.topics || []).includes('website-hide');
+}
+
+// Category rules: repo-name prefix first (our naming convention), description keywords as fallback
+const REPO_CATS = {
+  paper:    { label: 'Paper',    cls: 'type-paper' },
+  tutorial: { label: 'Tutorial', cls: 'type-tutorial' },
+  project:  { label: 'Project',  cls: 'type-project' },
+  tool:     { label: 'Tool',     cls: 'type-tool' },
+  resource: { label: 'Resource', cls: 'type-resource' },
+};
+const CAT_ORDER = ['paper', 'tutorial', 'project', 'tool', 'resource'];
+
+function categorize(r) {
+  const n = r.name.toLowerCase();
+  if (/^(paper_|dataset_)/.test(n)) return 'paper';
+  if (/^tutorial_/.test(n) || n === 'tutorials') return 'tutorial';
+  if (/^project_/.test(n) || n === 'projects') return 'project';
+  if (/^(tool_|agent_|cli-)/.test(n)) return 'tool';
+  if (/^awesome|^presentation_/.test(n) || ['papers', 'literature-review', 'autogeoai4sci'].includes(n)) return 'resource';
+  const d = (r.description || '').toLowerCase();
+  if (/\bpapers?\b|\bbenchmarks?\b|\bdatasets?\b/.test(d)) return 'paper';
+  if (/\bagents?\b|\bcli\b|\bskills?\b|\btools?\b/.test(d)) return 'tool';
+  if (/tutorial|lecture|course|practicum|template/.test(d)) return 'tutorial';
+  if (/awesome|curated/.test(d)) return 'resource';
+  return 'project';
+}
+
+// Pull a venue badge like "ICCV 2025" out of the description, if present
+const CONF_RE = /\b(ICCV|CVPR|ECCV|WACV|NeurIPS|ICLR|ICML|AAAI|ICA|AGILE|GIScience|SIGSPATIAL)\b\s*'?(\d{4})?/;
+
+const LANG_COLORS = {
+  'Python': '#3572A5', 'Jupyter Notebook': '#F37626', 'HTML': '#e34c26',
+  'JavaScript': '#f1e05a', 'TypeScript': '#3178c6', 'R': '#198CE7',
+  'C++': '#f34b7d', 'Shell': '#89e051', 'Markdown': '#083fa1',
+};
+
+function displayName(name) {
+  return name
+    .replace(/^(Paper_|Dataset_|Tutorial_|Project_|Tool_|Agent_|Presentation_)/i, '')
+    .replace(/_/g, ' ');
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function repoCardHtml(r) {
+  const cat = categorize(r);
+  const conf = cat === 'paper' && CONF_RE.exec(r.description || '');
+  const typeLabel = REPO_CATS[cat].label + (conf ? ' · ' + conf[1] + (conf[2] ? ' ' + conf[2] : '') : '');
+  const stars = r.stargazers_count > 0
+    ? `<span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> ${r.stargazers_count}</span>`
+    : '';
+  const lang = r.language
+    ? `<span class="repo-lang"><span class="lang-dot" style="background:${LANG_COLORS[r.language] || 'var(--muted)'}"></span>${escapeHtml(r.language)}</span>`
+    : `<span class="repo-updated">Updated ${new Date(r.pushed_at).toLocaleDateString('en-US', {month: 'short', year: 'numeric'})}</span>`;
+  return `<a class="repo-card" href="${escapeHtml(r.html_url)}" target="_blank" data-type="${cat}">
+    <div class="repo-card-header">
+      <span class="repo-type ${REPO_CATS[cat].cls}">${typeLabel}</span>
+      ${stars}
+    </div>
+    <div class="repo-name">${escapeHtml(displayName(r.name))}</div>
+    <div class="repo-desc">${escapeHtml(r.description || 'Part of the AutonomousGeoAI4Science open research ecosystem.')}</div>
+    <div class="repo-footer">
+      ${lang}
+      <span class="repo-arrow">→</span>
+    </div>
+  </a>`;
+}
+
+async function fetchAllRepos() {
+  const repos = [];
+  for (let page = 1; page <= 5; page++) {
+    const res = await fetch(`https://api.github.com/orgs/${GH_ORG}/repos?per_page=100&page=${page}&type=public`);
+    if (!res.ok) throw new Error('GitHub API ' + res.status);
+    const batch = await res.json();
+    repos.push(...batch);
+    if (batch.length < 100) break;
+  }
+  return repos;
+}
+
+async function loadGitHubData() {
+  // Serve from session cache when fresh; fall back to a stale cache if the API is unreachable
+  let cached = null;
+  try { cached = JSON.parse(sessionStorage.getItem(GH_CACHE_KEY)); } catch (e) {}
+  let data = cached && Date.now() - cached.t < GH_CACHE_TTL ? cached : null;
+
+  if (!data) {
+    try {
+      const [orgRes, repos] = await Promise.all([
+        fetch(`https://api.github.com/orgs/${GH_ORG}`),
+        fetchAllRepos(),
+      ]);
+      const org = orgRes.ok ? await orgRes.json() : null;
+      data = { t: Date.now(), org, repos };
+      try { sessionStorage.setItem(GH_CACHE_KEY, JSON.stringify(data)); } catch (e) {}
+    } catch (e) {
+      data = cached; // stale is better than nothing
     }
-    if (awesomeRes.ok) {
-      const repo = await awesomeRes.json();
-      const s = repo.stargazers_count;
-      document.getElementById('stat-awesome-stars').textContent = s + '★';
-      document.getElementById('btn-awesome').textContent = 'Awesome List ★' + s;
-      document.getElementById('section-awesome-stars').textContent = '★' + s;
-      document.getElementById('card-awesome-stars').textContent = s;
-    }
-    if (papersRes.ok) {
-      const repo = await papersRes.json();
-      document.getElementById('card-papers-stars').textContent = repo.stargazers_count;
-    }
-  } catch (e) {
-    // Silently keep fallback values if API fails
+  }
+
+  const grid = document.getElementById('repoGrid');
+  if (!data || !data.repos) {
+    grid.innerHTML = `<div class="repo-error">Couldn't reach the GitHub API right now — <a href="https://github.com/${GH_ORG}" target="_blank">browse all repositories on GitHub ↗</a></div>`;
+    return;
+  }
+
+  renderStats(data);
+  renderRepos(data.repos);
+}
+
+function renderStats({ org, repos }) {
+  if (org) {
+    document.getElementById('stat-repos').textContent = org.public_repos;
+    document.getElementById('stat-followers').textContent = org.followers;
+  }
+  const awesome = repos.find(r => r.name === 'awesome-autonomous-geoai');
+  if (awesome) {
+    const s = awesome.stargazers_count;
+    document.getElementById('stat-awesome-stars').textContent = s + '★';
+    document.getElementById('btn-awesome').textContent = 'Awesome List ★' + s;
+    document.getElementById('section-awesome-stars').textContent = '★' + s;
   }
 }
-fetchGitHubStats();
+
+function renderRepos(allRepos) {
+  const repos = allRepos
+    .filter(r => !isHiddenRepo(r) && !r.archived)
+    .sort((a, b) => (b.stargazers_count - a.stargazers_count) || (new Date(b.pushed_at) - new Date(a.pushed_at)));
+
+  // Group in category order so the "All" view reads papers → tutorials → projects → tools → resources
+  const byCat = {};
+  repos.forEach(r => { const c = categorize(r); (byCat[c] = byCat[c] || []).push(r); });
+  const ordered = CAT_ORDER.flatMap(c => byCat[c] || []);
+
+  const grid = document.getElementById('repoGrid');
+  grid.innerHTML = ordered.map(repoCardHtml).join('');
+
+  // Tab counts
+  document.querySelectorAll('.tab').forEach(btn => {
+    const m = /'(\w+)'/.exec(btn.getAttribute('onclick'));
+    if (!m) return;
+    const count = m[1] === 'all' ? ordered.length : (byCat[m[1]] || []).length;
+    btn.textContent = btn.textContent.replace(/\s*\(\d+\)$/, '') + ` (${count})`;
+  });
+
+  // Hook the newly created cards into the scroll-reveal observer
+  grid.querySelectorAll('.repo-card').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 6) * 0.07}s`;
+    observer.observe(el);
+  });
+
+  const subEl = document.querySelector('.repos .section-sub');
+  if (subEl) subEl.textContent = ordered.length + ' repositories spanning papers, tutorials, projects, and tools — live from GitHub';
+}
+
+loadGitHubData();
 
 // ── TYPEWRITER effect for hero ──
 const heroLine2 = document.querySelector('.hero h1 .line2');
