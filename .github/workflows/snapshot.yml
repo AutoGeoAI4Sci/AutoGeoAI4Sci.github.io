@@ -1,0 +1,22 @@
+name: Refresh repo snapshot
+on:
+  schedule: [{ cron: '0 6 * * *' }]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    defaults: { run: { shell: bash } }
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./scripts/snapshot.sh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit if changed
+        run: |
+          # ignore the timestamp; commit only when repos, org stats, or members changed
+          if diff <(git show HEAD:data/snapshot.json | jq -S 'del(.generated)') <(jq -S 'del(.generated)' data/snapshot.json) >/dev/null; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Refresh repo snapshot" && git push

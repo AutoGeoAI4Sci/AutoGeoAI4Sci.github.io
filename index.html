@@ -4,22 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AutonomousGeoAI4Science | Autonomous GeoAI for Science</title>
-<meta name="description" content="An open research and learning community advancing autonomous geospatial AI — tutorials, research code, papers, and tools at the intersection of AI, GeoAI, and scientific discovery.">
+<meta name="description" content="An open research and learning community advancing autonomous geospatial AI: tutorials, research code, papers, and tools at the intersection of AI, GeoAI, and scientific discovery.">
 <meta name="keywords" content="GeoAI, Autonomous AI, Geospatial AI, AI4Science, Remote Sensing, Disaster Intelligence, GIScience, Spatial Intelligence, Foundation Models">
 <meta name="author" content="AutonomousGeoAI4Science">
 <meta property="og:title" content="AutonomousGeoAI4Science">
 <meta property="og:description" content="Advancing AI systems that perceive, reason, and act in complex Earth and environmental systems. Open tutorials, research code, papers, and tools.">
 <meta property="og:url" content="https://autogeoai4sci.github.io/">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AutonomousGeoAI4Science">
-<meta name="twitter:description" content="Autonomous GeoAI for Science — open research community for GeoAI, disaster intelligence, and AI4Science.">
 <meta property="og:image" content="https://autogeoai4sci.github.io/assets/og-image.jpg">
 <meta property="og:image:width" content="1024">
 <meta property="og:image:height" content="572">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AutonomousGeoAI4Science">
+<meta name="twitter:description" content="Autonomous GeoAI for Science: open research community for GeoAI, disaster intelligence, and AI4Science.">
 <meta name="twitter:image" content="https://autogeoai4sci.github.io/assets/og-image.jpg">
-<meta name="theme-color" content="#060914">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛰️</text></svg>">
+<meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1720" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%2214%22 fill=%22none%22 stroke=%22%230e6e6a%22 stroke-width=%223%22/><circle cx=%2216%22 cy=%2216%22 r=%228%22 fill=%22none%22 stroke=%22%230e6e6a%22 stroke-width=%222%22/><circle cx=%2216%22 cy=%2216%22 r=%223%22 fill=%22%23e2553a%22/></svg>">
 <link rel="canonical" href="https://autogeoai4sci.github.io/">
 <script type="application/ld+json">
 {
@@ -29,984 +30,946 @@
   "alternateName": "AutoGeoAI4Sci",
   "url": "https://autogeoai4sci.github.io/",
   "logo": "https://autogeoai4sci.github.io/assets/og-image.jpg",
-  "description": "An open research and learning community advancing autonomous geospatial AI — tutorials, research code, papers, and tools at the intersection of AI, GeoAI, and scientific discovery.",
+  "description": "An open research and learning community advancing autonomous geospatial AI: tutorials, research code, papers, and tools at the intersection of AI, GeoAI, and scientific discovery.",
   "sameAs": ["https://github.com/AutoGeoAI4Sci"]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script>
+  // Apply the saved theme before first paint so there is no flash
+  try { const t = localStorage.getItem('agai-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #060914;
-    --bg2: #0c1122;
-    --cyan: #00d4ff;
-    --purple: #7c3aed;
-    --green: #00ff88;
-    --orange: #ff6b35;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --card: rgba(255,255,255,0.03);
-    --border: rgba(255,255,255,0.06);
+:root {
+  --paper: #f3efe6;
+  --paper-2: #ebe5d8;
+  --card: #fbf9f4;
+  --ink: #15202b;
+  --ink-2: #44505c;
+  --muted: #6f7882;
+  --line: #d9d1c1;
+  --line-2: #c8bea9;
+  --teal: #0e6e6a;
+  --teal-soft: #d5e7e3;
+  --signal: #e2553a;
+  --signal-soft: #f8ddd4;
+  --ochre: #b7862a;
+  --ochre-soft: #f1e4c5;
+  --blue: #2f5d9a;
+  --blue-soft: #dbe4f1;
+  --plum: #7b4a8c;
+  --plum-soft: #eadcef;
+  --contour: rgba(14,110,106,0.16);
+  --shadow: 0 1px 0 rgba(21,32,43,0.04), 0 12px 32px -18px rgba(21,32,43,0.28);
+  --radius: 14px;
+  --display: 'Bricolage Grotesque', 'Instrument Sans', system-ui, sans-serif;
+  --body: 'Instrument Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1720; --paper-2: #131d28; --card: #17222e;
+    --ink: #ebe6da; --ink-2: #bfc4c4; --muted: #8b96a0;
+    --line: #26323f; --line-2: #34424f;
+    --teal: #4fc0b3; --teal-soft: #173a3a;
+    --signal: #ff7a5c; --signal-soft: #3d2420;
+    --ochre: #e0b456; --ochre-soft: #3a3020;
+    --blue: #7ea6e0; --blue-soft: #1d2b40;
+    --plum: #c595d6; --plum-soft: #33243b;
+    --contour: rgba(79,192,179,0.13);
+    --shadow: 0 12px 32px -18px rgba(0,0,0,0.7);
+    color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --paper: #0f1720; --paper-2: #131d28; --card: #17222e;
+  --ink: #ebe6da; --ink-2: #bfc4c4; --muted: #8b96a0;
+  --line: #26323f; --line-2: #34424f;
+  --teal: #4fc0b3; --teal-soft: #173a3a;
+  --signal: #ff7a5c; --signal-soft: #3d2420;
+  --ochre: #e0b456; --ochre-soft: #3a3020;
+  --blue: #7ea6e0; --blue-soft: #1d2b40;
+  --plum: #c595d6; --plum-soft: #33243b;
+  --contour: rgba(79,192,179,0.13);
+  --shadow: 0 12px 32px -18px rgba(0,0,0,0.7);
+  color-scheme: dark;
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+a { color: inherit; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; border-radius: 4px; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.mono { font-family: var(--mono); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
-  html { scroll-behavior: smooth; }
+/* ── NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner { display: flex; align-items: center; gap: 20px; height: 60px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; white-space: nowrap; }
+.brand svg { width: 26px; height: 26px; flex: none; }
+.brand small { font-family: var(--mono); font-weight: 400; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.04em; }
+.nav-links { display: flex; gap: 2px; margin-left: auto; }
+.nav-links a { text-decoration: none; font-size: 0.88rem; color: var(--ink-2); padding: 6px 10px; border-radius: 8px; }
+.nav-links a:hover, .nav-links a.on { color: var(--ink); background: var(--paper-2); }
+.nav-tools { display: flex; gap: 6px; align-items: center; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 34px; min-width: 34px; padding: 0 9px; border-radius: 9px;
+  border: 1px solid var(--line); background: var(--card); cursor: pointer;
+  font-size: 0.8rem; text-decoration: none; color: var(--ink-2);
+}
+.icon-btn:hover { border-color: var(--line-2); color: var(--ink); }
+.icon-btn svg { width: 16px; height: 16px; }
+kbd { font-family: var(--mono); font-size: 0.7rem; padding: 1px 5px; border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 4px; color: var(--muted); }
+@media (max-width: 920px) { .nav-links { display: none; } .nav-tools { margin-left: auto; } }
+@media (max-width: 480px) { .brand small, .search-hint { display: none; } }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Space Grotesk', sans-serif;
-    overflow-x: hidden;
-  }
+/* ── HERO ── */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+#topo { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
+.hero-inner { position: relative; display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; padding: 72px 24px 64px; align-items: center; }
+@media (max-width: 960px) { .hero-inner { grid-template-columns: 1fr; padding-top: 48px; } }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); }
+.live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--signal); box-shadow: 0 0 0 0 var(--signal); animation: ping 2.4s infinite; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--signal) 60%, transparent); } 70%,100% { box-shadow: 0 0 0 9px transparent; } }
+.hero h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.5rem, 5.6vw, 4.4rem); line-height: 0.98; letter-spacing: -0.035em; margin: 18px 0 20px; }
+.hero h1 em { font-style: normal; color: var(--teal); position: relative; }
+.hero h1 em::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0.04em; height: 0.12em; background: var(--signal); opacity: 0.8; border-radius: 2px; }
+.lede { font-size: 1.12rem; color: var(--ink-2); max-width: 34em; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 10px; font-weight: 600; font-size: 0.93rem; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: transform .15s, background .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn-ink { background: var(--ink); color: var(--paper); }
+.btn-line { border-color: var(--line-2); background: var(--card); }
+.btn svg { width: 16px; height: 16px; }
+.coords { margin-top: 30px; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; }
 
-  /* ── CANVAS BACKGROUND ── */
-  #cosmos { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+/* dashboard */
+.dash { background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 20px; }
+.dash-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+.dash-title { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.dash-src { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.kpi { background: var(--card); padding: 14px 14px 12px; text-decoration: none; display: block; }
+a.kpi:hover { background: var(--paper-2); }
+.kpi-num { font-family: var(--display); font-weight: 800; font-size: 1.9rem; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.kpi-label { font-size: 0.76rem; color: var(--muted); margin-top: 6px; }
+.dash-sub { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; display: flex; justify-content: space-between; }
+.stack { display: flex; height: 12px; border-radius: 6px; overflow: hidden; gap: 2px; }
+.stack span { display: block; height: 100%; transition: flex .6s ease; min-width: 3px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 10px; }
+.legend button { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--ink-2); background: none; border: 0; cursor: pointer; padding: 2px 0; }
+.legend button:hover { color: var(--ink); text-decoration: underline; }
+.legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.legend b { font-family: var(--mono); font-weight: 500; color: var(--muted); }
+.latest { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line-2); display: flex; gap: 10px; align-items: center; font-size: 0.85rem; }
+.latest a { font-weight: 600; text-decoration: none; }
+.latest a:hover { text-decoration: underline; }
+.latest .t { margin-left: auto; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 2.5rem;
-    background: rgba(6,9,20,0.7);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--cyan);
-    letter-spacing: 0.05em;
-  }
-  .nav-links { display: flex; gap: 2rem; }
-  .nav-links a {
-    color: var(--muted); text-decoration: none; font-size: 0.875rem;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--text); }
-  .nav-cta {
-    padding: 0.45rem 1.2rem;
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
-    color: #fff; border-radius: 6px; font-size: 0.8rem; font-weight: 600;
-    text-decoration: none; letter-spacing: 0.03em;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+/* ── SECTIONS ── */
+section.block { padding: 80px 0; border-bottom: 1px solid var(--line); }
+.sec-head { display: grid; grid-template-columns: 90px 1fr auto; gap: 20px; align-items: end; margin-bottom: 34px; }
+.sec-num { font-family: var(--mono); font-size: 0.78rem; color: var(--signal); padding-bottom: 8px; border-bottom: 2px solid var(--signal); align-self: start; margin-top: 10px; }
+.sec-head h2 { font-family: var(--display); font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
+.sec-head p { color: var(--ink-2); margin-top: 8px; max-width: 46em; }
+.sec-head .aside { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); text-align: right; }
+@media (max-width: 720px) { .sec-head { grid-template-columns: 1fr; gap: 10px; } .sec-num { width: max-content; } .sec-head .aside { text-align: left; } }
 
-  /* ── HERO ── */
-  .hero {
-    position: relative; z-index: 1;
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    padding: 8rem 2rem 4rem;
-  }
-  .hero-inner { max-width: 900px; }
+/* quick start */
+.quick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+@media (max-width: 900px) { .quick { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .quick { grid-template-columns: 1fr; } }
+.qtile { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 20px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); text-decoration: none; transition: border-color .15s, transform .15s, box-shadow .15s; min-height: 150px; }
+.qtile:hover { border-color: var(--line-2); transform: translateY(-2px); box-shadow: var(--shadow); }
+.qtile .ico { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; }
+.qtile .ico svg { width: 20px; height: 20px; }
+.qtile h3 { font-family: var(--display); font-size: 1.12rem; font-weight: 600; letter-spacing: -0.01em; }
+.qtile p { font-size: 0.88rem; color: var(--ink-2); }
+.qtile .go { position: absolute; top: 18px; right: 18px; font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+.qtile:hover .go { color: var(--signal); }
 
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.4rem 1rem;
-    border: 1px solid rgba(0,212,255,0.3);
-    border-radius: 100px;
-    font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;
-    color: var(--cyan); letter-spacing: 0.08em;
-    background: rgba(0,212,255,0.06);
-    margin-bottom: 2rem;
-    animation: fadeUp 0.8s ease both;
-  }
-  .badge-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 8px var(--green);
-    animation: pulse-dot 2s infinite;
-  }
-  @keyframes pulse-dot {
-    0%,100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
+/* pillars */
+.pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+@media (max-width: 900px) { .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .pillars { grid-template-columns: minmax(0, 1fr); } }
+.pillar { min-width: 0; text-align: left; background: transparent; border: 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 24px 22px; cursor: pointer; display: flex; flex-direction: column; gap: 10px; transition: background .15s; }
+.pillar:hover { background: var(--card); }
+.pillar-top { display: flex; justify-content: space-between; align-items: center; }
+.pillar-code { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; }
+.pillar-count { font-family: var(--mono); font-size: 0.74rem; padding: 2px 8px; border-radius: 99px; background: var(--teal-soft); color: var(--teal); }
+.pillar h3 { font-family: var(--display); font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; }
+.pillar p { font-size: 0.88rem; color: var(--ink-2); }
+.pillar .peek { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pillar .peek::before { content: '↳ '; color: var(--signal); }
 
-  .hero h1 {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.8s 0.1s ease both;
-  }
-  .hero h1 .line1 { display: block; color: var(--text); }
-  .hero h1 .line2 {
-    display: block;
-    background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--green) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+/* explorer */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+.search { position: relative; flex: 1 1 280px; }
+.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--muted); }
+.search input { width: 100%; height: 42px; padding: 0 70px 0 38px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--card); font-size: 0.95rem; }
+.search input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-soft); }
+.search kbd { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); }
+.seg { display: inline-flex; border: 1px solid var(--line-2); border-radius: 10px; overflow: hidden; background: var(--card); height: 42px; }
+.seg button { border: 0; background: none; padding: 0 13px; font-size: 0.84rem; cursor: pointer; color: var(--ink-2); display: inline-flex; align-items: center; gap: 6px; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg button svg { width: 15px; height: 15px; }
+.select { height: 42px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--card); padding: 0 12px; font-size: 0.86rem; cursor: pointer; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 99px; border: 1px solid var(--line-2); background: transparent; font-size: 0.84rem; cursor: pointer; color: var(--ink-2); }
+.chip:hover { border-color: var(--ink-2); color: var(--ink); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; }
+.chip b { font-family: var(--mono); font-weight: 500; font-size: 0.74rem; color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.chip[aria-pressed="true"] b { color: color-mix(in srgb, var(--paper) 70%, transparent); }
+.result-line { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 0.84rem; color: var(--muted); margin: 14px 0 16px; min-height: 26px; }
+.result-line .clear { background: none; border: 0; color: var(--signal); cursor: pointer; font-size: 0.84rem; text-decoration: underline; }
+.active-pillar { display: inline-flex; gap: 6px; align-items: center; padding: 3px 4px 3px 10px; border-radius: 99px; background: var(--teal-soft); color: var(--teal); font-size: 0.8rem; }
+.active-pillar button { border: 0; background: none; cursor: pointer; color: inherit; width: 20px; height: 20px; border-radius: 50%; }
 
-  .hero-sub {
-    font-size: 1.1rem; color: var(--muted); line-height: 1.7;
-    max-width: 640px; margin: 0 auto 2.5rem;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.card { display: flex; flex-direction: column; gap: 9px; padding: 18px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); text-decoration: none; transition: border-color .15s, transform .15s, box-shadow .15s; animation: rise .35s ease both; }
+.card:hover { border-color: var(--line-2); transform: translateY(-2px); box-shadow: var(--shadow); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+.card-top { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.badge { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 7px; border-radius: 5px; font-weight: 500; }
+.badge.venue { background: var(--ink); color: var(--paper); }
+.badge.ext { background: transparent; border: 1px dashed var(--line-2); color: var(--muted); }
+.card-top .stars { margin-left: auto; font-family: var(--mono); font-size: 0.76rem; color: var(--ochre); }
+.card h3 { font-family: var(--display); font-weight: 600; font-size: 1.06rem; letter-spacing: -0.01em; line-height: 1.25; word-break: break-word; }
+.card p { font-size: 0.86rem; color: var(--ink-2); flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.card p.none { color: var(--muted); font-style: italic; }
+.card-foot { display: flex; align-items: center; gap: 12px; font-size: 0.76rem; color: var(--muted); padding-top: 10px; border-top: 1px solid var(--line); font-family: var(--mono); }
+.card-foot .lang { display: inline-flex; align-items: center; gap: 5px; }
+.card-foot .lang i { width: 8px; height: 8px; border-radius: 50%; }
+.card-foot .home { margin-left: auto; color: var(--teal); text-decoration: none; }
+.card-foot .home:hover { text-decoration: underline; }
+.card-foot .home { cursor: pointer; }
+mark { background: var(--ochre-soft); color: inherit; border-radius: 3px; padding: 0 1px; }
 
-  .hero-btns {
-    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
-  .btn-primary {
-    padding: 0.8rem 2rem;
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
-    color: #fff; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
-    text-decoration: none; letter-spacing: 0.02em;
-    box-shadow: 0 0 30px rgba(0,212,255,0.25);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 50px rgba(0,212,255,0.4);
-  }
-  .btn-outline {
-    padding: 0.8rem 2rem;
-    border: 1px solid var(--border);
-    color: var(--text); border-radius: 8px; font-size: 0.9rem; font-weight: 500;
-    text-decoration: none; background: var(--card);
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .btn-outline:hover {
-    border-color: rgba(0,212,255,0.4);
-    background: rgba(0,212,255,0.05);
-  }
+/* list view */
+.grid.list { grid-template-columns: 1fr; gap: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--card); }
+.grid.list .card { flex-direction: row; align-items: center; gap: 14px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 12px 16px; animation: none; }
+.grid.list .card:last-child { border-bottom: 0; }
+.grid.list .card:hover { transform: none; box-shadow: none; background: var(--paper-2); }
+.grid.list .card-top { width: 150px; flex: none; }
+.grid.list .card-top .stars { display: none; }
+.grid.list h3 { width: 260px; flex: none; font-size: 0.96rem; }
+.grid.list p { -webkit-line-clamp: 1; font-size: 0.84rem; }
+.grid.list .card-foot { border: 0; padding: 0; width: 230px; flex: none; justify-content: flex-end; }
+.grid.list .card-foot .home { margin-left: 0; }
+@media (max-width: 860px) { .grid.list .card { flex-wrap: wrap; } .grid.list h3, .grid.list .card-top, .grid.list .card-foot { width: auto; } .grid.list p { flex-basis: 100%; } }
 
-  /* ── STATS ── */
-  .stats-bar {
-    position: relative; z-index: 1;
-    display: flex; justify-content: center; gap: 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background: var(--card);
-    backdrop-filter: blur(10px);
-    flex-wrap: wrap;
-  }
-  .stat {
-    flex: 1; min-width: 150px; max-width: 220px;
-    padding: 2rem 1.5rem; text-align: center;
-    border-right: 1px solid var(--border);
-    opacity: 0; transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  .stat:last-child { border-right: none; }
-  .stat.visible { opacity: 1; transform: none; }
-  .stat-num {
-    font-size: 2.2rem; font-weight: 700;
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .stat-label { color: var(--muted); font-size: 0.8rem; letter-spacing: 0.05em; margin-top: 0.25rem; }
+.empty { grid-column: 1 / -1; padding: 48px 20px; text-align: center; color: var(--muted); border: 1px dashed var(--line-2); border-radius: var(--radius); }
+.skeleton { height: 170px; border-radius: var(--radius); background: linear-gradient(90deg, var(--card), var(--paper-2), var(--card)); background-size: 200% 100%; animation: shimmer 1.4s infinite linear; border: 1px solid var(--line); }
+@keyframes shimmer { to { background-position: -200% 0; } }
+.more-row { text-align: center; margin-top: 20px; }
 
-  /* ── SECTIONS ── */
-  section { position: relative; z-index: 1; }
+/* activity + awesome two-col */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+@media (max-width: 900px) { .two { grid-template-columns: 1fr; } }
+.panel-title { font-family: var(--display); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.panel-title a { font-family: var(--body); font-size: 0.84rem; font-weight: 500; color: var(--teal); text-decoration: none; }
+.panel-title a:hover { text-decoration: underline; }
+.panel-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 18px; }
+.timeline { list-style: none; position: relative; }
+.timeline::before { content: ''; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 1px; background: var(--line-2); }
+.timeline li { position: relative; padding: 0 0 18px 26px; }
+.timeline li::before { content: ''; position: absolute; left: 0; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: var(--paper); border: 2px solid var(--dot, var(--teal)); }
+.timeline .when { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+.timeline a { font-weight: 600; text-decoration: none; }
+.timeline a:hover { text-decoration: underline; }
+.timeline .what { font-size: 0.84rem; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
 
-  .section-header {
-    text-align: center; margin-bottom: 3rem;
-  }
-  .section-tag {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--cyan); padding: 0.3rem 0.8rem;
-    border: 1px solid rgba(0,212,255,0.25); border-radius: 4px;
-    background: rgba(0,212,255,0.06);
-    margin-bottom: 1rem;
-  }
-  .section-title {
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 700; line-height: 1.2;
-    letter-spacing: -0.02em;
-  }
-  .section-sub { color: var(--muted); margin-top: 0.75rem; font-size: 1rem; }
+.bars { display: flex; flex-direction: column; gap: 9px; }
+.bar { display: grid; grid-template-columns: 170px 1fr 44px; gap: 12px; align-items: center; text-decoration: none; font-size: 0.88rem; }
+.bar:hover .bar-name { text-decoration: underline; }
+.bar-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-track { height: 10px; background: var(--paper-2); border-radius: 5px; overflow: hidden; }
+.bar-fill { display: block; height: 100%; background: var(--teal); border-radius: 5px; width: 0; transition: width .8s cubic-bezier(.2,.7,.2,1); }
+.bar:nth-child(3n+2) .bar-fill { background: var(--signal); }
+.bar:nth-child(3n) .bar-fill { background: var(--ochre); }
+.bar-n { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); text-align: right; }
+@media (max-width: 480px) { .bar { grid-template-columns: 120px 1fr 36px; } }
+.awesome-foot { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; align-items: center; }
+.awesome-foot .note { font-size: 0.8rem; color: var(--muted); font-family: var(--mono); }
 
-  /* ── FOCUS AREAS ── */
-  .focus { padding: 6rem 2rem; }
-  .focus-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5px;
-    max-width: 1100px; margin: 0 auto;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-  }
-  .focus-card {
-    background: var(--bg);
-    padding: 2rem;
-    transition: background 0.3s;
-    opacity: 0; transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
-  }
-  .focus-card.visible { opacity: 1; transform: none; }
-  .focus-card:hover { background: var(--bg2); }
-  .focus-icon {
-    width: 44px; height: 44px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem; margin-bottom: 1rem;
-  }
-  .focus-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .focus-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.6; }
+/* people + contribute */
+.people { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 8px; }
+.person { display: flex; align-items: center; gap: 12px; padding: 10px 16px 10px 10px; border-radius: 99px; border: 1px solid var(--line); background: var(--card); text-decoration: none; transition: border-color .15s; }
+.person:hover { border-color: var(--line-2); }
+.person img { width: 42px; height: 42px; border-radius: 50%; background: var(--paper-2); }
+.person b { display: block; font-size: 0.92rem; }
+.person span span { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+.steps { list-style: none; counter-reset: s; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 34px; }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+.steps li { counter-increment: s; padding: 20px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--card); }
+.steps li::before { content: '0' counter(s); font-family: var(--mono); font-size: 0.75rem; color: var(--signal); display: block; margin-bottom: 8px; }
+.steps h3 { font-family: var(--display); font-weight: 600; font-size: 1.06rem; margin-bottom: 6px; }
+.steps p { font-size: 0.87rem; color: var(--ink-2); }
+.naming { margin-top: 14px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--card); }
+.naming table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+.naming th, .naming td { text-align: left; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+.naming tr:last-child td { border-bottom: 0; }
+.naming th { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; background: var(--paper-2); }
+.naming code { font-family: var(--mono); font-size: 0.82rem; background: var(--paper-2); padding: 2px 6px; border-radius: 4px; }
+.naming td:last-child { font-family: var(--mono); color: var(--muted); text-align: right; }
+@media (max-width: 560px) { .naming th:nth-child(2), .naming td:nth-child(2) { display: none; } }
 
-  /* ── REPOS ── */
-  .repos { padding: 6rem 2rem; background: var(--bg2); }
-  .tabs {
-    display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
-    margin-bottom: 3rem;
-  }
-  .tab {
-    padding: 0.5rem 1.25rem;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    background: transparent; color: var(--muted);
-    cursor: pointer; font-size: 0.8rem; font-family: inherit;
-    font-weight: 500; letter-spacing: 0.03em;
-    transition: all 0.2s;
-  }
-  .tab:hover { border-color: rgba(0,212,255,0.3); color: var(--text); }
-  .tab.active {
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
-    border-color: transparent; color: #fff;
-  }
+/* mission + footer */
+.mission { padding: 90px 0; text-align: center; }
+.mission blockquote { font-family: var(--display); font-weight: 400; font-size: clamp(1.35rem, 2.8vw, 2rem); line-height: 1.35; letter-spacing: -0.015em; max-width: 30em; margin: 0 auto; }
+.mission blockquote b { font-weight: 800; color: var(--teal); }
+.mission .attr { margin-top: 18px; font-family: var(--mono); font-size: 0.76rem; color: var(--muted); letter-spacing: 0.06em; }
+.mission .cta-row { justify-content: center; }
+footer { border-top: 1px solid var(--line); padding: 34px 0 40px; font-size: 0.86rem; color: var(--muted); }
+.foot { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+.foot nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.foot a { text-decoration: none; }
+.foot a:hover { color: var(--ink); text-decoration: underline; }
 
-  .repo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.25rem;
-    max-width: 1200px; margin: 0 auto;
-  }
-  .repo-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    text-decoration: none; color: var(--text);
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    display: flex; flex-direction: column;
-    opacity: 0; transform: translateY(16px);
-    transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s, box-shadow 0.2s;
-  }
-  .repo-card.visible { opacity: 1; transform: none; }
-  .repo-card:hover {
-    border-color: rgba(0,212,255,0.3);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(0,212,255,0.08);
-  }
-  .repo-card-header {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    margin-bottom: 0.75rem;
-  }
-  .repo-type {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: 500;
-  }
-  .type-paper  { background: rgba(124,58,237,0.15); color: #a78bfa; border: 1px solid rgba(124,58,237,0.25); }
-  .type-tutorial { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.2); }
-  .type-project { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
-  .type-tool { background: rgba(255,107,53,0.1); color: var(--orange); border: 1px solid rgba(255,107,53,0.2); }
-  .type-resource { background: rgba(255,200,0,0.1); color: #fbbf24; border: 1px solid rgba(255,200,0,0.2); }
+.toast { position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 30px); opacity: 0; background: var(--ink); color: var(--paper); padding: 9px 16px; border-radius: 10px; font-size: 0.85rem; transition: all .25s; z-index: 80; pointer-events: none; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-  .repo-stars { display: flex; align-items: center; gap: 0.3rem; color: var(--muted); font-size: 0.78rem; }
-  .repo-stars svg { width: 12px; height: 12px; fill: #fbbf24; }
-  .repo-name { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; color: var(--text); }
-  .repo-desc { color: var(--muted); font-size: 0.82rem; line-height: 1.6; flex: 1; }
-  .repo-footer {
-    margin-top: 1rem; padding-top: 1rem;
-    border-top: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .repo-lang { font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
-  .lang-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .repo-arrow { color: var(--muted); font-size: 0.8rem; transition: color 0.2s, transform 0.2s; }
-  .repo-card:hover .repo-arrow { color: var(--cyan); transform: translateX(4px); }
-
-  /* ── AWESOME LIST SECTION ── */
-  .awesome { padding: 6rem 2rem; }
-  .awesome-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
-  }
-  @media (max-width: 768px) { .awesome-inner { grid-template-columns: 1fr; } }
-  .awesome-text h2 {
-    font-size: 2.2rem; font-weight: 700; line-height: 1.2;
-    letter-spacing: -0.02em; margin-bottom: 1rem;
-  }
-  .awesome-text p { color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
-  .awesome-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-  .tag {
-    padding: 0.3rem 0.75rem; border-radius: 100px;
-    border: 1px solid var(--border); font-size: 0.75rem; color: var(--muted);
-    background: var(--card);
-  }
-  .awesome-list-visual {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 16px; padding: 1.5rem;
-    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
-    line-height: 2;
-  }
-  .al-header { color: var(--muted); margin-bottom: 1rem; font-size: 0.7rem; letter-spacing: 0.1em; }
-  .al-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.3rem 0; }
-  .al-bullet { color: var(--cyan); }
-  .al-cat { color: var(--text); font-weight: 500; }
-  .al-count { color: var(--muted); margin-left: auto; }
-
-  /* ── GLOBE SECTION ── */
-  .globe-section {
-    padding: 5rem 2rem;
-    background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
-    text-align: center;
-  }
-  .globe-container {
-    position: relative; display: inline-block;
-    width: 300px; height: 300px; margin: 3rem auto;
-  }
-  .globe-ring {
-    position: absolute; border-radius: 50%;
-    border: 1px solid;
-    animation: spin linear infinite;
-  }
-  .ring1 {
-    inset: 0;
-    border-color: rgba(0,212,255,0.2);
-    animation-duration: 20s;
-  }
-  .ring2 {
-    inset: 20px;
-    border-color: rgba(124,58,237,0.25);
-    animation-duration: 15s;
-    animation-direction: reverse;
-    transform-origin: center;
-  }
-  .ring3 {
-    inset: 50px;
-    border-color: rgba(0,255,136,0.2);
-    animation-duration: 10s;
-  }
-  .globe-core {
-    position: absolute;
-    inset: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, rgba(0,212,255,0.4) 0%, rgba(124,58,237,0.3) 50%, rgba(0,0,0,0.8) 100%);
-    box-shadow: 0 0 60px rgba(0,212,255,0.2), inset 0 0 40px rgba(0,0,0,0.5);
-  }
-  .globe-dot {
-    position: absolute; width: 6px; height: 6px;
-    border-radius: 50%; background: var(--cyan);
-    box-shadow: 0 0 10px var(--cyan);
-    animation: orbit 8s linear infinite;
-  }
-  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  @keyframes orbit {
-    from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
-    to { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
-  }
-  @keyframes orbit2 {
-    from { transform: rotate(90deg) translateX(80px) rotate(-90deg); }
-    to { transform: rotate(450deg) translateX(80px) rotate(-450deg); }
-  }
-  .globe-dot2 {
-    position: absolute; width: 4px; height: 4px;
-    border-radius: 50%; background: var(--purple);
-    box-shadow: 0 0 8px var(--purple);
-    top: 50%; left: 50%; margin: -2px;
-    animation: orbit2 5s linear infinite;
-  }
-
-  /* ── MISSION QUOTE ── */
-  .mission { padding: 6rem 2rem; }
-  .mission-card {
-    max-width: 860px; margin: 0 auto;
-    background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(124,58,237,0.05));
-    border: 1px solid rgba(0,212,255,0.15);
-    border-radius: 20px; padding: 3.5rem;
-    text-align: center; position: relative; overflow: hidden;
-  }
-  .mission-card::before {
-    content: '"';
-    position: absolute; top: -0.5rem; left: 2rem;
-    font-size: 10rem; font-weight: 900; line-height: 1;
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text; opacity: 0.15;
-    font-family: Georgia, serif;
-  }
-  .mission-quote {
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-    line-height: 1.7; font-weight: 400; color: var(--text);
-    margin-bottom: 1.5rem; position: relative;
-  }
-  .mission-quote em {
-    font-style: normal;
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text; font-weight: 600;
-  }
-  .mission-attr { color: var(--muted); font-size: 0.85rem; }
-
-  /* ── FOOTER ── */
-  footer {
-    position: relative; z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 3rem 2rem;
-    text-align: center;
-    background: var(--bg);
-  }
-  .footer-logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem; color: var(--cyan); margin-bottom: 1rem;
-  }
-  .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--text); }
-  .footer-copy { color: var(--muted); font-size: 0.78rem; }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── GLOW DIVIDER ── */
-  .glow-line {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--cyan), var(--purple), transparent);
-    opacity: 0.3; margin: 0;
-  }
-
-  /* ── HIDDEN UTIL ── */
-  .hidden-tab { display: none; }
-
-  /* ── DYNAMIC REPO STATES ── */
-  .repo-loading, .repo-error {
-    grid-column: 1 / -1;
-    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-    padding: 3rem 1rem;
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
-  }
-  .repo-error a { color: var(--cyan); }
-  .type-dataset { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
-  .repo-updated { font-size: 0.72rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+@media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
 
-<canvas id="cosmos"></canvas>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">AutoGeoAI4Sci</div>
-  <div class="nav-links">
-    <a href="#focus">Focus</a>
-    <a href="#repos">Repos</a>
-    <a href="#awesome">Resources</a>
-    <a href="#mission">Mission</a>
+<!-- ── NAV ── -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="AutoGeoAI4Sci home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="var(--teal)" stroke-width="2.5"/><path d="M4 16c4-5 8-5 12 0s8 5 12 0" fill="none" stroke="var(--teal)" stroke-width="1.6"/><circle cx="16" cy="16" r="3.2" fill="var(--signal)"/></svg>
+      AutoGeoAI4Sci <small>EST. 2026</small>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#start">Start</a>
+      <a href="#focus">Focus</a>
+      <a href="#explore">Explore</a>
+      <a href="#pulse">Activity</a>
+      <a href="#community">Community</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="searchJump" title="Search repositories (press /)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span class="search-hint"><kbd>/</kbd></span>
+      </button>
+      <button class="icon-btn" id="themeBtn" title="Toggle light / dark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+      </button>
+      <a class="icon-btn" href="https://github.com/AutoGeoAI4Sci" target="_blank" rel="noopener" title="GitHub organization">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      </a>
+    </div>
   </div>
-  <a class="nav-cta" href="https://github.com/AutoGeoAI4Sci" target="_blank">GitHub ↗</a>
-</nav>
+</header>
 
-<!-- HERO -->
+<main id="top">
+<!-- ── HERO ── -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Open Research Community · Est. 2026
+  <svg id="topo" aria-hidden="true"></svg>
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow"><span class="live-dot"></span>Open research &amp; learning community</span>
+      <h1>Autonomous GeoAI<br>for <em>Science</em></h1>
+      <p class="lede">We build and share AI systems that perceive, reason, and act in complex Earth and environmental systems, through open tutorials, research code, papers, and community tools.</p>
+      <div class="cta-row">
+        <a class="btn btn-ink" href="#explore">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Explore repositories
+        </a>
+        <a class="btn btn-line" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" rel="noopener">★ Awesome list <span class="mono" data-bind="awesomeStars"></span></a>
+        <a class="btn btn-line" href="#community">Join us</a>
+      </div>
+      <p class="coords">30.6280° N, 96.3344° W · UNITED STATES · MIT LICENSE</p>
     </div>
-    <h1>
-      <span class="line1">Autonomous GeoAI</span>
-      <span class="line2">for Science</span>
-    </h1>
-    <p class="hero-sub">
-      Advancing AI systems that can perceive, reason, and act in complex Earth and environmental systems — through open tutorials, research code, papers, and community tools.
-    </p>
-    <div class="hero-btns">
-      <a class="btn-primary" href="https://github.com/AutoGeoAI4Sci" target="_blank">Explore on GitHub</a>
-      <a class="btn-outline" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" id="btn-awesome">Awesome List ★14</a>
-      <a class="btn-outline" href="https://rayford295.github.io/" target="_blank">Blog ↗</a>
+
+    <aside class="dash" aria-label="Organization at a glance">
+      <div class="dash-head">
+        <span class="dash-title">At a glance</span>
+        <span class="dash-src" id="dataSrc">loading…</span>
+      </div>
+      <div class="kpis">
+        <a class="kpi" href="#explore" data-scope="all"><div class="kpi-num" data-bind="total">–</div><div class="kpi-label">Repositories</div></a>
+        <a class="kpi" href="#explore" data-scope="community"><div class="kpi-num" data-bind="community">–</div><div class="kpi-label">Community work</div></a>
+        <a class="kpi" href="#explore" data-scope="collected"><div class="kpi-num" data-bind="collected">–</div><div class="kpi-label">Collected projects</div></a>
+        <a class="kpi" href="#awesome"><div class="kpi-num" data-bind="awesomeEntries">–</div><div class="kpi-label">Awesome-list entries</div></a>
+        <a class="kpi" href="https://github.com/AutoGeoAI4Sci" target="_blank" rel="noopener"><div class="kpi-num" data-bind="followers">–</div><div class="kpi-label">Followers</div></a>
+        <a class="kpi" href="#pulse"><div class="kpi-num" data-bind="active30">–</div><div class="kpi-label">Updated in 30 days</div></a>
+      </div>
+      <div class="dash-sub"><span>Community work by type</span><span>click to filter</span></div>
+      <div class="stack" id="catStack"></div>
+      <div class="legend" id="catLegend"></div>
+      <div class="latest" id="latest"></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ── 01 START ── -->
+<section class="block" id="start">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01 / START</span>
+      <div><h2>I want to…</h2><p>The shortest path to what you came for.</p></div>
+      <span class="aside"></span>
+    </div>
+    <div class="quick">
+      <a class="qtile" href="#explore" data-cat="tutorial">
+        <span class="ico" style="background:var(--teal-soft);color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7l10-4 10 4-10 4z"/><path d="M6 9v5c0 2 3 3 6 3s6-1 6-3V9"/></svg></span>
+        <h3>Learn GeoAI hands-on</h3><p>Tutorials and guest lectures: GWR, map making, land-cover segmentation, street view, spatial SQL.</p>
+        <span class="go" data-count="tutorial">→</span>
+      </a>
+      <a class="qtile" href="#explore" data-cat="paper">
+        <span class="ico" style="background:var(--signal-soft);color:var(--signal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h8M9 17h6"/></svg></span>
+        <h3>Reproduce a paper</h3><p>Code and data behind published work on disaster damage, street-to-satellite synthesis, and geo-privacy.</p>
+        <span class="go" data-count="paper">→</span>
+      </a>
+      <a class="qtile" href="#explore" data-cat="tool">
+        <span class="ico" style="background:var(--ochre-soft);color:var(--ochre)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span>
+        <h3>Use a tool or agent</h3><p>Research agents, spatial heterogeneity and causality packages, CLI bridges for GIS software.</p>
+        <span class="go" data-count="tool">→</span>
+      </a>
+      <a class="qtile" href="#awesome">
+        <span class="ico" style="background:var(--blue-soft);color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg></span>
+        <h3>Find resources</h3><p>The awesome list: books, venues, journals, datasets, software, research groups, internships, and funding.</p>
+        <span class="go">→</span>
+      </a>
+      <a class="qtile" href="#explore" data-cat="project">
+        <span class="ico" style="background:var(--plum-soft);color:var(--plum)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span>
+        <h3>See active projects</h3><p>Knowledge graphs, map tracing, geolocation games, and other ongoing open research.</p>
+        <span class="go" data-count="project">→</span>
+      </a>
+      <a class="qtile" href="#community">
+        <span class="ico" style="background:var(--paper-2);color:var(--ink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M17 11a3 3 0 1 0 0-6M18 14.5c2 .6 3.2 2.5 3.5 5.5"/></svg></span>
+        <h3>Contribute</h3><p>Add a repo, open an issue, or suggest a resource. The naming convention below makes it easy.</p>
+        <span class="go">→</span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat"><div class="stat-num" id="stat-repos">56</div><div class="stat-label">Public Repos</div></div>
-  <div class="stat"><div class="stat-num" id="stat-followers">31</div><div class="stat-label">Followers</div></div>
-  <div class="stat"><div class="stat-num" id="stat-awesome-stars">14★</div><div class="stat-label">Awesome List</div></div>
-  <div class="stat"><div class="stat-num">6</div><div class="stat-label">Focus Areas</div></div>
-  <div class="stat"><div class="stat-num">MIT</div><div class="stat-label">Open License</div></div>
-</div>
-
-<div class="glow-line"></div>
-
-<!-- FOCUS AREAS -->
-<section class="focus" id="focus">
-  <div style="max-width:1100px;margin:0 auto">
-    <div class="section-header">
-      <div class="section-tag">Research Focus</div>
-      <h2 class="section-title">Six Core Pillars</h2>
-      <p class="section-sub">The thematic areas that define our work at the frontier of GeoAI</p>
+<!-- ── 02 FOCUS ── -->
+<section class="block" id="focus">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02 / FOCUS</span>
+      <div><h2>Six research pillars</h2><p>Each pillar shows how many repositories touch it. Click one to see them in the explorer.</p></div>
+      <span class="aside">matched by keyword<br>on name, description, topics</span>
     </div>
-    <div class="focus-grid">
-      <div class="focus-card">
-        <div class="focus-icon" style="background:rgba(0,212,255,0.1)">🛰️</div>
-        <h3>Autonomous GeoAI & AI4Science</h3>
-        <p>Building agent-based systems that can autonomously process, reason, and act on geospatial data to advance scientific discovery.</p>
+    <div class="pillars" id="pillars"></div>
+  </div>
+</section>
+
+<!-- ── 03 EXPLORE ── -->
+<section class="block" id="explore">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03 / EXPLORE</span>
+      <div><h2>Repository explorer</h2><p>Every public repository in the organization, read live from GitHub. Search, filter, sort, and share the URL of any view.</p></div>
+      <span class="aside" id="exploreAside"></span>
+    </div>
+
+    <div class="toolbar">
+      <label class="search">
+        <span class="sr-only">Search repositories</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search: street view, disaster, agent, ICCV…" autocomplete="off">
+        <kbd>/</kbd>
+      </label>
+      <div class="seg" role="group" aria-label="Scope" id="scopeSeg">
+        <button data-scope="community" aria-pressed="true">Community</button>
+        <button data-scope="collected" aria-pressed="false">Collected</button>
+        <button data-scope="all" aria-pressed="false">All</button>
       </div>
-      <div class="focus-card">
-        <div class="focus-icon" style="background:rgba(124,58,237,0.1)">🌍</div>
-        <h3>Foundation Models for Earth Observation</h3>
-        <p>Adapting and evaluating large pretrained models for satellite imagery, land cover mapping, and environmental monitoring tasks.</p>
+      <select class="select" id="sort" aria-label="Sort by">
+        <option value="updated">Recently updated</option>
+        <option value="stars">Most stars</option>
+        <option value="name">Name A–Z</option>
+      </select>
+      <div class="seg" role="group" aria-label="View">
+        <button data-view="grid" aria-pressed="true" title="Grid view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="sr-only">Grid</span></button>
+        <button data-view="list" aria-pressed="false" title="List view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span class="sr-only">List</span></button>
       </div>
-      <div class="focus-card">
-        <div class="focus-icon" style="background:rgba(0,255,136,0.1)">🗺️</div>
-        <h3>Multimodal Spatial Reasoning</h3>
-        <p>Fusing satellite imagery, street-view photos, maps, and temporal sequences for richer geospatial understanding.</p>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="result-line">
+      <span id="resultCount" aria-live="polite"></span>
+      <span style="display:flex;gap:12px;align-items:center">
+        <span id="pillarTag"></span>
+        <button class="clear" id="clearBtn" hidden>Clear filters</button>
+        <button class="clear" id="shareBtn" style="color:var(--teal)">Copy link to this view</button>
+      </span>
+    </div>
+    <div class="grid" id="grid">
+      <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+    </div>
+    <div class="more-row" id="moreRow" hidden><button class="btn btn-line" id="moreBtn">Show all</button></div>
+  </div>
+</section>
+
+<!-- ── 04 PULSE ── -->
+<section class="block" id="pulse">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04 / PULSE</span>
+      <div><h2>What is moving</h2><p>Latest pushes across the organization, and what the awesome list covers right now.</p></div>
+      <span class="aside"></span>
+    </div>
+    <div class="two">
+      <div>
+        <div class="panel-title">Recently updated <a href="https://github.com/orgs/AutoGeoAI4Sci/repositories?sort=updated" target="_blank" rel="noopener">all on GitHub ↗</a></div>
+        <p class="panel-sub">Ten most recent pushes, community and collected.</p>
+        <ul class="timeline" id="timeline"></ul>
       </div>
-      <div class="focus-card">
-        <div class="focus-icon" style="background:rgba(255,107,53,0.1)">🔬</div>
-        <h3>GIScience & Spatial Intelligence</h3>
-        <p>Advancing spatial thinking through GWR, spatial query, and AI-augmented geographic information systems.</p>
-      </div>
-      <div class="focus-card">
-        <div class="focus-icon" style="background:rgba(0,212,255,0.1)">🏙️</div>
-        <h3>Urban & Disaster Intelligence</h3>
-        <p>Street-view AI for damage assessment, urban building analytics, and human-centric sensing of built environments.</p>
-      </div>
-      <div class="focus-card">
-        <div class="focus-icon" style="background:rgba(255,200,0,0.1)">⚖️</div>
-        <h3>Explainable & Responsible GeoAI</h3>
-        <p>Open science practices, reproducibility, and trustworthy deployment of AI systems for spatial and environmental applications.</p>
+      <div id="awesome">
+        <div class="panel-title">Awesome Autonomous GeoAI <a href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" rel="noopener">open list ↗</a></div>
+        <p class="panel-sub">Entries per section, counted live from the list's README. Click a section to jump there.</p>
+        <div class="bars" id="bars"><div class="skeleton" style="height:220px"></div></div>
+        <div class="awesome-foot">
+          <a class="btn btn-ink" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" rel="noopener">★ Star the list <span class="mono" data-bind="awesomeStars"></span></a>
+          <a class="btn btn-line" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai/issues/new" target="_blank" rel="noopener">Suggest a resource</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="glow-line"></div>
-
-<!-- REPOS -->
-<section class="repos" id="repos">
-  <div style="max-width:1200px;margin:0 auto">
-    <div class="section-header">
-      <div class="section-tag">Open Source</div>
-      <h2 class="section-title">Repository Ecosystem</h2>
-      <p class="section-sub">A live index of everything we build — fetched in real time from GitHub</p>
+<!-- ── 05 COMMUNITY ── -->
+<section class="block" id="community">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">05 / PEOPLE</span>
+      <div><h2>Community &amp; contributing</h2><p>Public members of the organization, and how to add your own work.</p></div>
+      <span class="aside"></span>
     </div>
-
-    <div class="tabs">
-      <button class="tab active" onclick="filterRepos('all',this)">All</button>
-      <button class="tab" onclick="filterRepos('paper',this)">Papers</button>
-      <button class="tab" onclick="filterRepos('tutorial',this)">Tutorials</button>
-      <button class="tab" onclick="filterRepos('project',this)">Projects</button>
-      <button class="tab" onclick="filterRepos('tool',this)">Tools</button>
-      <button class="tab" onclick="filterRepos('resource',this)">Resources</button>
-    </div>
-
-    <div class="repo-grid" id="repoGrid">
-      <div class="repo-loading" id="repoLoading">
-        <span class="badge-dot"></span> Loading repositories live from GitHub…
-      </div>
-    </div>
+    <div class="people" id="people"></div>
+    <ol class="steps">
+      <li><h3>Name it by type</h3><p>Prefix the repository with its type (table below). The site files it into the right category automatically.</p></li>
+      <li><h3>Write a one-line description</h3><p>The description is what people search. Put the venue in it (for example "ICCV 2025") and the site adds a venue badge.</p></li>
+      <li><h3>Open it to the community</h3><p>Transfer or fork it into the organization, or open an issue in <a href="https://github.com/AutoGeoAI4Sci/AutoGeoAI4Sci" target="_blank" rel="noopener">the hub repo</a>. Add the topic <code class="mono">website-hide</code> to keep a repo off this page.</p></li>
+    </ol>
+    <div class="naming">
+      <table>
+        <thead><tr><th>Prefix</th><th>Use it for</th><th>Repos</th></tr></thead>
+        <tbody id="namingBody"></tbody>
+      </table>
     </div>
   </div>
 </section>
 
-<div class="glow-line"></div>
-
-<!-- AWESOME LIST SECTION -->
-<section class="awesome" id="awesome">
-  <div class="awesome-inner">
-    <div class="awesome-text">
-      <div class="section-tag">Community Resource</div>
-      <h2>Awesome Autonomous GeoAI <span style="color:var(--green)" id="section-awesome-stars">★14</span></h2>
-      <p>A living, curated list of the best tools, datasets, papers, research groups, courses, and funding opportunities at the intersection of autonomous AI and geospatial science.</p>
-      <div class="awesome-tags">
-        <span class="tag">Books</span>
-        <span class="tag">Conferences</span>
-        <span class="tag">Research Groups</span>
-        <span class="tag">Journals</span>
-        <span class="tag">Software</span>
-        <span class="tag">Internships</span>
-        <span class="tag">Funding</span>
-        <span class="tag">Education</span>
-        <span class="tag">Datasets</span>
-        <span class="tag">Foundation Models</span>
-      </div>
-      <a class="btn-primary" href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" style="display:inline-block">Browse the List ↗</a>
-    </div>
-    <div class="awesome-list-visual">
-      <div class="al-header"># awesome-autonomous-geoai</div>
-      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">📚 Books & Textbooks</span><span class="al-count" style="color:var(--cyan)">GeoAI, RS</span></div>
-      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">🏛️ Research Groups</span><span class="al-count" style="color:var(--purple)">UCSB, UW, TAMU</span></div>
-      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">🎓 Conferences</span><span class="al-count" style="color:var(--green)">CVPR, NeurIPS, SIGSPATIAL</span></div>
-      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">📰 Journals</span><span class="al-count" style="color:var(--cyan)">IJGIS, RSEnv, IEEE TGRS</span></div>
-      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">🛠️ Software Tools</span><span class="al-count" style="color:var(--orange)">GeoPandas, GEE, QGIS</span></div>
-      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">💼 Internships</span><span class="al-count" style="color:var(--purple)">Esri, Planet, Niantic</span></div>
-      <div class="al-item"><span class="al-bullet">▸</span><span class="al-cat">💰 Funding</span><span class="al-count" style="color:var(--green)">NSF, Google.org, NVIDIA</span></div>
+<!-- ── MISSION ── -->
+<section class="mission">
+  <div class="wrap">
+    <blockquote>We build <b>AI systems that can perceive, reason, and act</b> in complex Earth and environmental systems with minimal human intervention, and we do it in the open.</blockquote>
+    <p class="attr">AUTONOMOUSGEOAI4SCIENCE · MISSION</p>
+    <div class="cta-row">
+      <a class="btn btn-ink" href="https://github.com/AutoGeoAI4Sci" target="_blank" rel="noopener">Follow on GitHub</a>
+      <a class="btn btn-line" href="mailto:yyf990925@gmail.com">Contact</a>
+      <a class="btn btn-line" href="https://rayford295.github.io/" target="_blank" rel="noopener">Blog ↗</a>
     </div>
   </div>
 </section>
+</main>
 
-<!-- GLOBE + MISSION -->
-<section class="globe-section">
-  <div class="section-tag">Where We're Going</div>
-  <div class="globe-container">
-    <div class="globe-ring ring1"></div>
-    <div class="globe-ring ring2"></div>
-    <div class="globe-ring ring3"></div>
-    <div class="globe-core"></div>
-    <div class="globe-dot"></div>
-    <div class="globe-dot2"></div>
-  </div>
-</section>
-
-<section class="mission" id="mission">
-  <div class="mission-card">
-    <p class="mission-quote">
-      We build <em>AI systems that can perceive, reason, and act</em> in complex Earth and environmental systems with minimal human intervention — bringing together tutorials, open-source code, research projects, and papers at the frontier of <em>autonomous geospatial intelligence</em>.
-    </p>
-    <p class="mission-attr">— AutonomousGeoAI4Science Mission · United States of America</p>
-    <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a class="btn-primary" href="https://github.com/AutoGeoAI4Sci" target="_blank">Join the Community</a>
-      <a class="btn-outline" href="mailto:yyf990925@gmail.com">Contact ↗</a>
-    </div>
-  </div>
-</section>
-
-<div class="glow-line"></div>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">AutoGeoAI4Sci</div>
-  <div class="footer-links">
-    <a href="https://github.com/AutoGeoAI4Sci" target="_blank">GitHub</a>
-    <a href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank">Awesome List</a>
-    <a href="https://github.com/AutoGeoAI4Sci/tutorials" target="_blank">Tutorials</a>
-    <a href="https://github.com/AutoGeoAI4Sci/papers" target="_blank">Papers</a>
-    <a href="https://rayford295.github.io/" target="_blank">Blog</a>
-    <a href="mailto:yyf990925@gmail.com">Contact</a>
+  <div class="wrap foot">
+    <span>MIT License · AutonomousGeoAI4Science · <span id="footData"></span></span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/AutoGeoAI4Sci" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" rel="noopener">Awesome list</a>
+      <a href="https://github.com/AutoGeoAI4Sci/tutorials" target="_blank" rel="noopener">Tutorials</a>
+      <a href="https://github.com/AutoGeoAI4Sci/papers" target="_blank" rel="noopener">Papers</a>
+      <a href="https://github.com/AutoGeoAI4Sci/AutoGeoAI4Sci.github.io" target="_blank" rel="noopener">Site source</a>
+    </nav>
   </div>
-  <p class="footer-copy">MIT License · AutonomousGeoAI4Science · Open Research Community</p>
 </footer>
+<div class="toast" id="toast" role="status"></div>
 
 <script>
-// ── COSMOS CANVAS ──
-const canvas = document.getElementById('cosmos');
-const ctx = canvas.getContext('2d');
-let W, H, stars = [], connections = [];
+'use strict';
+const ORG = 'AutoGeoAI4Sci';
+const AWESOME = 'awesome-autonomous-geoai';
+const CACHE_KEY = 'agai-live-v2';
+const CACHE_TTL = 15 * 60 * 1000; // unauthenticated API allows 60 req/h per visitor; we use 3 per load
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', resize);
-
-// Generate stars
-for (let i = 0; i < 180; i++) {
-  stars.push({
-    x: Math.random(), y: Math.random(),
-    r: Math.random() * 1.2 + 0.2,
-    a: Math.random(),
-    da: (Math.random() - 0.5) * 0.003,
-    vx: (Math.random() - 0.5) * 0.00008,
-    vy: (Math.random() - 0.5) * 0.00008,
-  });
-}
-
-// Shooting star
-let shooters = [];
-function spawnShooter() {
-  shooters.push({
-    x: Math.random(), y: Math.random() * 0.5,
-    vx: 0.003 + Math.random() * 0.003,
-    vy: 0.001 + Math.random() * 0.002,
-    life: 1, trail: [],
-  });
-  setTimeout(spawnShooter, 4000 + Math.random() * 8000);
-}
-setTimeout(spawnShooter, 2000);
-
-function drawCosmos(t) {
-  ctx.clearRect(0, 0, W, H);
-
-  // Draw connections between nearby stars
-  ctx.strokeStyle = 'rgba(0,212,255,0.03)';
-  ctx.lineWidth = 0.5;
-  for (let i = 0; i < stars.length; i++) {
-    for (let j = i + 1; j < stars.length; j++) {
-      const dx = (stars[i].x - stars[j].x) * W;
-      const dy = (stars[i].y - stars[j].y) * H;
-      const d = Math.sqrt(dx*dx + dy*dy);
-      if (d < 120) {
-        ctx.globalAlpha = (1 - d/120) * 0.15;
-        ctx.beginPath();
-        ctx.moveTo(stars[i].x * W, stars[i].y * H);
-        ctx.lineTo(stars[j].x * W, stars[j].y * H);
-        ctx.stroke();
-      }
-    }
-  }
-
-  // Draw stars
-  for (const s of stars) {
-    s.a += s.da;
-    if (s.a < 0.1 || s.a > 1) s.da *= -1;
-    s.x += s.vx; s.y += s.vy;
-    if (s.x < 0) s.x = 1; if (s.x > 1) s.x = 0;
-    if (s.y < 0) s.y = 1; if (s.y > 1) s.y = 0;
-    ctx.globalAlpha = s.a * 0.8;
-    ctx.fillStyle = '#fff';
-    ctx.beginPath();
-    ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  // Draw shooters
-  for (let i = shooters.length - 1; i >= 0; i--) {
-    const s = shooters[i];
-    s.trail.push({x: s.x, y: s.y});
-    if (s.trail.length > 20) s.trail.shift();
-    s.x += s.vx; s.y += s.vy; s.life -= 0.012;
-    if (s.life <= 0 || s.x > 1.1 || s.y > 1.1) { shooters.splice(i, 1); continue; }
-    ctx.globalAlpha = s.life * 0.8;
-    const grad = ctx.createLinearGradient(
-      s.trail[0]?.x * W || s.x * W, s.trail[0]?.y * H || s.y * H,
-      s.x * W, s.y * H
-    );
-    grad.addColorStop(0, 'transparent');
-    grad.addColorStop(1, '#00d4ff');
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    for (let j = 0; j < s.trail.length; j++) {
-      j === 0 ? ctx.moveTo(s.trail[j].x * W, s.trail[j].y * H)
-              : ctx.lineTo(s.trail[j].x * W, s.trail[j].y * H);
-    }
-    ctx.stroke();
-  }
-
-  ctx.globalAlpha = 1;
-  requestAnimationFrame(drawCosmos);
-}
-requestAnimationFrame(drawCosmos);
-
-// ── SCROLL ANIMATIONS ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.stat, .focus-card, .repo-card').forEach((el, i) => {
-  el.style.transitionDelay = `${(i % 6) * 0.07}s`;
-  observer.observe(el);
-});
-
-// ── REPO FILTER ──
-function filterRepos(type, btn) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.repo-card').forEach(card => {
-    if (type === 'all' || card.dataset.type === type) {
-      card.style.display = 'flex';
-      // Re-trigger animation
-      card.classList.remove('visible');
-      setTimeout(() => card.classList.add('visible'), 50);
-    } else {
-      card.style.display = 'none';
-    }
-  });
-}
-
-// ── GITHUB LIVE DATA (stats + full repo grid) ──
-const GH_ORG = 'AutoGeoAI4Sci';
-const GH_CACHE_KEY = 'gh-live-v1';
-const GH_CACHE_TTL = 10 * 60 * 1000; // 10 min — stays well under the 60 req/h unauthenticated API limit
-
-// Repos hidden from the site: org meta repos, website repos, or anything tagged with the 'website-hide' topic
-function isHiddenRepo(r) {
-  const n = r.name.toLowerCase();
-  return n === '.github' || n.endsWith('.github.io') || (r.topics || []).includes('website-hide');
-}
-
-// Category rules: repo-name prefix first (our naming convention), description keywords as fallback
-const REPO_CATS = {
-  paper:    { label: 'Paper',    cls: 'type-paper' },
-  tutorial: { label: 'Tutorial', cls: 'type-tutorial' },
-  project:  { label: 'Project',  cls: 'type-project' },
-  tool:     { label: 'Tool',     cls: 'type-tool' },
-  resource: { label: 'Resource', cls: 'type-resource' },
+/* ───────── Categories ───────── */
+const CATS = {
+  paper:    { label: 'Paper',    color: 'var(--signal)', soft: 'var(--signal-soft)', prefix: 'Paper_, Dataset_', use: 'Code, data, and artifacts behind a publication' },
+  tutorial: { label: 'Tutorial', color: 'var(--teal)',   soft: 'var(--teal-soft)',   prefix: 'Tutorial_',        use: 'Lectures, course material, hands-on notebooks' },
+  tool:     { label: 'Tool',     color: 'var(--ochre)',  soft: 'var(--ochre-soft)',  prefix: 'Tool_, Agent_',    use: 'Packages, agents, CLIs, reusable software' },
+  project:  { label: 'Project',  color: 'var(--plum)',   soft: 'var(--plum-soft)',   prefix: 'Project_',         use: 'Ongoing research projects and prototypes' },
+  resource: { label: 'Resource', color: 'var(--blue)',   soft: 'var(--blue-soft)',   prefix: 'awesome-, Presentation_, Website_', use: 'Curated lists, talks, indexes, websites' },
 };
-const CAT_ORDER = ['paper', 'tutorial', 'project', 'tool', 'resource'];
+const CAT_ORDER = ['paper', 'tutorial', 'tool', 'project', 'resource'];
+const PREFIX_RE = /^(paper_|dataset_|tutorial_|project_|tool_|agent_|presentation_|website_)/i;
 
 function categorize(r) {
   const n = r.name.toLowerCase();
-  if (/^(paper_|dataset_)/.test(n)) return 'paper';
+  if (/^(paper_|dataset_)/.test(n) || n === 'papers') return 'paper';
   if (/^tutorial_/.test(n) || n === 'tutorials') return 'tutorial';
+  if (/^(tool_|agent_)/.test(n)) return 'tool';
   if (/^project_/.test(n) || n === 'projects') return 'project';
-  if (/^(tool_|agent_|cli-)/.test(n)) return 'tool';
-  if (/^awesome|^presentation_/.test(n) || ['papers', 'literature-review', 'autogeoai4sci'].includes(n)) return 'resource';
-  const d = (r.description || '').toLowerCase();
-  if (/\bpapers?\b|\bbenchmarks?\b|\bdatasets?\b/.test(d)) return 'paper';
-  if (/\bagents?\b|\bcli\b|\bskills?\b|\btools?\b/.test(d)) return 'tool';
-  if (/tutorial|lecture|course|practicum|template/.test(d)) return 'tutorial';
-  if (/awesome|curated/.test(d)) return 'resource';
+  if (/^(awesome|presentation_|website_)/.test(n) || ['literature-review', 'autogeoai4sci'].includes(n)) return 'resource';
+  const d = `${n} ${(r.description || '').toLowerCase()}`;
+  if (/awesome|curated|book|resources/.test(d)) return 'resource';
+  if (/tutorial|lecture|course|template|practicum/.test(d)) return 'tutorial';
+  if (/\bpaper\b|benchmark|dataset|\[(iccv|cvpr|eccv|neurips)/.test(d)) return 'paper';
+  if (/\bagents?\b|\bcli\b|skills?|\btool|platform|mcp/.test(d)) return 'tool';
   return 'project';
 }
+// "Community" = created here, or a fork that follows the type-prefix convention (the community's own work).
+// "Collected" = unprefixed forks of external projects the group follows.
+const isCommunity = r => !r.fork || PREFIX_RE.test(r.name);
+const isHidden = r => r.name === '.github' || /\.github\.io$/i.test(r.name) || r.name === 'demo-repository' || (r.topics || []).includes('website-hide') || r.archived;
 
-// Pull a venue badge like "ICCV 2025" out of the description, if present
-const CONF_RE = /\b(ICCV|CVPR|ECCV|WACV|NeurIPS|ICLR|ICML|AAAI|ICA|AGILE|GIScience|SIGSPATIAL)\b\s*'?(\d{4})?/;
+/* ───────── Research pillars ─────────
+   Keyword patterns tested against "name + description + topics". Tune these to steer which repos each pillar claims. */
+const PILLARS = [
+  { code: 'P1', title: 'Autonomous GeoAI & agents', blurb: 'Agent systems that process, reason over, and act on geospatial data for scientific discovery.',
+    re: /agent|autonom|\bcli\b|mcp|research agent|multiagent|skill|openresearch/ },
+  { code: 'P2', title: 'Foundation models for Earth observation', blurb: 'Adapting and evaluating pretrained models for satellite imagery, land cover, and environmental monitoring.',
+    re: /foundation|embedding|remote sensing|satellite|earth|super-resolution|land cover|weather|rs-embed/ },
+  { code: 'P3', title: 'Multimodal spatial reasoning', blurb: 'Fusing satellite, street-view, map, and temporal data for richer geospatial understanding.',
+    re: /street|multimodal|vision-language|\bvlm\b|\blmm\b|clip|sat2street|panorama|geolocat|geoguessr|synthes/ },
+  { code: 'P4', title: 'GIScience & spatial intelligence', blurb: 'Spatial statistics, spatial query, cartography, and AI-augmented GIS.',
+    re: /\bgis\b|giscience|spatial|regression|sql|cartograph|map-making|heterogeneity|causal|arcgis|qgis|poi/ },
+  { code: 'P5', title: 'Urban & disaster intelligence', blurb: 'Damage assessment, building analytics, and human-centric sensing of built environments.',
+    re: /disaster|damage|hurricane|emergenc|urban|building|resilien|perception|place pulse/ },
+  { code: 'P6', title: '3D scenes & world models', blurb: 'Gaussian splatting, point clouds, and generative Earth models for spatial simulation.',
+    re: /\b3d\b|gaussian|splat|point set|pointnet|scene|world model|stadium|reconstruct/ },
+];
+const haystack = r => `${r.name.replace(/[_-]/g, ' ')} ${r.description || ''} ${(r.topics || []).join(' ')}`.toLowerCase();
 
-const LANG_COLORS = {
-  'Python': '#3572A5', 'Jupyter Notebook': '#F37626', 'HTML': '#e34c26',
-  'JavaScript': '#f1e05a', 'TypeScript': '#3178c6', 'R': '#198CE7',
-  'C++': '#f34b7d', 'Shell': '#89e051', 'Markdown': '#083fa1',
-};
+/* ───────── Helpers ───────── */
+const VENUE_RE = /\b(ICCV|CVPR|ECCV|WACV|NeurIPS|ICLR|ICML|AAAI|KDD|SIGSPATIAL|GIScience|AGILE|ISPRS|IJGIS|AAG)\b[\s']*(\d{4})/i; // year required, so a field name like "GIScience" is not mistaken for a venue
+const LANG = { Python: '#3572A5', 'Jupyter Notebook': '#DA5B0B', HTML: '#e34c26', JavaScript: '#d9b82f', TypeScript: '#3178c6', R: '#198CE7', Rust: '#b7410e', Shell: '#4f9c2f', 'C++': '#f34b7d' };
+const pretty = n => n.replace(PREFIX_RE, '').replace(/[_]/g, ' ');
+function ago(iso) {
+  const s = (Date.now() - new Date(iso)) / 1000;
+  const units = [[31536000, 'y'], [2592000, 'mo'], [604800, 'w'], [86400, 'd'], [3600, 'h'], [60, 'm']];
+  for (const [sec, u] of units) if (s >= sec) return `${Math.floor(s / sec)}${u} ago`;
+  return 'just now';
+}
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 1800); }
+function bind(key, val) { $$(`[data-bind="${key}"]`).forEach(el => el.textContent = val); }
 
-function displayName(name) {
-  return name
-    .replace(/^(Paper_|Dataset_|Tutorial_|Project_|Tool_|Agent_|Presentation_)/i, '')
-    .replace(/_/g, ' ');
+/* ───────── Data loading: live API → session cache → static snapshot ───────── */
+async function fetchJSON(url) { const r = await fetch(url); if (!r.ok) throw new Error(r.status); return r.json(); }
+async function loadData() {
+  let cached = null;
+  try { cached = JSON.parse(sessionStorage.getItem(CACHE_KEY)); } catch (e) {}
+  if (cached && Date.now() - cached.t < CACHE_TTL) return { ...cached, src: 'live' };
+  try {
+    const [org, repos, members] = await Promise.all([
+      fetchJSON(`https://api.github.com/orgs/${ORG}`),
+      fetchJSON(`https://api.github.com/orgs/${ORG}/repos?per_page=100&type=public`),
+      fetchJSON(`https://api.github.com/orgs/${ORG}/public_members`).catch(() => []),
+    ]);
+    const data = { t: Date.now(), org, repos, members };
+    try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch (e) {}
+    return { ...data, src: 'live' };
+  } catch (e) {
+    if (cached) return { ...cached, src: 'cached' };
+    const snap = await fetchJSON('data/snapshot.json');
+    return { t: new Date(snap.generated).getTime(), ...snap, src: 'snapshot' };
+  }
 }
 
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* ───────── State (mirrored in the URL) ───────── */
+const state = { q: '', cat: 'all', scope: 'community', sort: 'updated', view: 'grid', pillar: null, all: false };
+function readURL() {
+  const p = new URLSearchParams(location.search);
+  for (const k of ['q', 'cat', 'scope', 'sort', 'view', 'pillar']) if (p.get(k)) state[k] = p.get(k);
+  try { const v = localStorage.getItem('agai-view'); if (v && !p.get('view')) state.view = v; } catch (e) {}
+}
+function writeURL() {
+  const p = new URLSearchParams();
+  if (state.q) p.set('q', state.q);
+  if (state.cat !== 'all') p.set('cat', state.cat);
+  if (state.scope !== 'community') p.set('scope', state.scope);
+  if (state.sort !== 'updated') p.set('sort', state.sort);
+  if (state.pillar) p.set('pillar', state.pillar);
+  const qs = p.toString();
+  history.replaceState(null, '', (qs ? `?${qs}` : location.pathname) + location.hash);
 }
 
-function repoCardHtml(r) {
-  const cat = categorize(r);
-  const conf = cat === 'paper' && CONF_RE.exec(r.description || '');
-  const typeLabel = REPO_CATS[cat].label + (conf ? ' · ' + conf[1] + (conf[2] ? ' ' + conf[2] : '') : '');
-  const stars = r.stargazers_count > 0
-    ? `<span class="repo-stars"><svg viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg> ${r.stargazers_count}</span>`
-    : '';
-  const lang = r.language
-    ? `<span class="repo-lang"><span class="lang-dot" style="background:${LANG_COLORS[r.language] || 'var(--muted)'}"></span>${escapeHtml(r.language)}</span>`
-    : `<span class="repo-updated">Updated ${new Date(r.pushed_at).toLocaleDateString('en-US', {month: 'short', year: 'numeric'})}</span>`;
-  return `<a class="repo-card" href="${escapeHtml(r.html_url)}" target="_blank" data-type="${cat}">
-    <div class="repo-card-header">
-      <span class="repo-type ${REPO_CATS[cat].cls}">${typeLabel}</span>
-      ${stars}
+let REPOS = [];
+
+/* ───────── Render: dashboard ───────── */
+function renderDashboard(data) {
+  const comm = REPOS.filter(r => r.community);
+  bind('total', REPOS.length);
+  bind('community', comm.length);
+  bind('collected', REPOS.length - comm.length);
+  bind('followers', data.org?.followers ?? '–');
+  bind('active30', REPOS.filter(r => Date.now() - new Date(r.pushed_at) < 30 * 864e5).length);
+  const aw = REPOS.find(r => r.name === AWESOME);
+  if (aw) bind('awesomeStars', `${aw.stargazers_count}`);
+
+  const counts = Object.fromEntries(CAT_ORDER.map(c => [c, comm.filter(r => r.cat === c).length]));
+  $('#catStack').innerHTML = CAT_ORDER.filter(c => counts[c]).map(c => `<span style="flex:${counts[c]};background:${CATS[c].color}" title="${CATS[c].label}: ${counts[c]}"></span>`).join('');
+  $('#catLegend').innerHTML = CAT_ORDER.map(c => `<button data-cat="${c}"><i style="background:${CATS[c].color}"></i>${CATS[c].label} <b>${counts[c]}</b></button>`).join('');
+  $$('.go[data-count]').forEach(el => el.textContent = `${counts[el.dataset.count]} →`);
+
+  const latest = [...REPOS].sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at))[0];
+  if (latest) $('#latest').innerHTML = `<span class="live-dot"></span><span>Latest push:</span><a href="${esc(latest.html_url)}" target="_blank" rel="noopener">${esc(pretty(latest.name))}</a><span class="t">${ago(latest.pushed_at)}</span>`;
+
+  const when = new Date(data.t).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  $('#dataSrc').textContent = data.src === 'snapshot' ? `snapshot · ${when}` : `live · ${when}`;
+  $('#footData').textContent = `repo data ${data.src} as of ${when}`;
+}
+
+/* ───────── Render: pillars ───────── */
+function renderPillars() {
+  $('#pillars').innerHTML = PILLARS.map(p => {
+    const hits = REPOS.filter(r => p.re.test(r.hay));
+    const top = hits.filter(r => r.community).slice(0, 3).map(r => pretty(r.name)).join(' · ');
+    return `<button class="pillar" data-pillar="${p.code}">
+      <span class="pillar-top"><span class="pillar-code">${p.code}</span><span class="pillar-count">${hits.length} repos</span></span>
+      <h3>${esc(p.title)}</h3><p>${esc(p.blurb)}</p>
+      ${top ? `<span class="peek">${esc(top)}</span>` : ''}
+    </button>`;
+  }).join('');
+}
+
+/* ───────── Render: explorer ───────── */
+function highlight(text, q) {
+  const safe = esc(text);
+  if (!q) return safe;
+  const terms = q.split(/\s+/).filter(Boolean).map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  return terms.length ? safe.replace(new RegExp(`(${terms.join('|')})`, 'gi'), '<mark>$1</mark>') : safe;
+}
+function filtered(ignoreCat = false) {
+  const terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+  const pillar = PILLARS.find(p => p.code === state.pillar);
+  return REPOS.filter(r =>
+    (state.scope === 'all' || (state.scope === 'community') === r.community) &&
+    (ignoreCat || state.cat === 'all' || r.cat === state.cat) &&
+    (!pillar || pillar.re.test(r.hay)) &&
+    terms.every(t => r.hay.includes(t)));
+}
+function sorted(list) {
+  const by = {
+    updated: (a, b) => new Date(b.pushed_at) - new Date(a.pushed_at),
+    stars: (a, b) => (b.stargazers_count - a.stargazers_count) || new Date(b.pushed_at) - new Date(a.pushed_at),
+    name: (a, b) => pretty(a.name).localeCompare(pretty(b.name)),
+  };
+  return [...list].sort(by[state.sort] || by.updated);
+}
+function cardHTML(r) {
+  const c = CATS[r.cat];
+  const venue = VENUE_RE.exec(r.description || '');
+  // A real <a> here would nest inside the card's <a>, which HTML forbids (the parser splits the card), so open it via JS
+  const home = r.homepage && /^https?:/.test(r.homepage) ? `<span class="home" role="link" tabindex="0" data-home="${esc(r.homepage)}">site ↗</span>` : '';
+  return `<a class="card" href="${esc(r.html_url)}" target="_blank" rel="noopener">
+    <div class="card-top">
+      <span class="badge" style="background:${c.soft};color:${c.color}">${c.label}</span>
+      ${venue ? `<span class="badge venue">${esc(venue[1].toUpperCase() === 'NEURIPS' ? 'NeurIPS' : venue[1])}${venue[2] ? ' ' + venue[2] : ''}</span>` : ''}
+      ${r.community ? '' : '<span class="badge ext" title="Fork of an external project the community follows">collected</span>'}
+      ${r.stargazers_count ? `<span class="stars">★ ${r.stargazers_count}</span>` : ''}
     </div>
-    <div class="repo-name">${escapeHtml(displayName(r.name))}</div>
-    <div class="repo-desc">${escapeHtml(r.description || 'Part of the AutonomousGeoAI4Science open research ecosystem.')}</div>
-    <div class="repo-footer">
-      ${lang}
-      <span class="repo-arrow">→</span>
+    <h3>${highlight(pretty(r.name), state.q)}</h3>
+    <p class="${r.description ? '' : 'none'}">${r.description ? highlight(r.description, state.q) : 'No description yet.'}</p>
+    <div class="card-foot">
+      ${r.language ? `<span class="lang"><i style="background:${LANG[r.language] || 'var(--muted)'}"></i>${esc(r.language)}</span>` : ''}
+      <span title="${esc(r.pushed_at)}">${ago(r.pushed_at)}</span>
+      ${home}
     </div>
   </a>`;
 }
+const PAGE = 12;
+function renderExplorer() {
+  // chips with counts that respect every filter except category
+  const base = filtered(true);
+  $('#chips').innerHTML = [['all', 'All', 'var(--ink-2)', base.length], ...CAT_ORDER.map(c => [c, CATS[c].label, CATS[c].color, base.filter(r => r.cat === c).length])]
+    .map(([k, label, color, n]) => `<button class="chip" data-cat="${k}" aria-pressed="${state.cat === k}">${k === 'all' ? '' : `<i style="background:${color}"></i>`}${label} <b>${n}</b></button>`).join('');
 
-async function fetchAllRepos() {
-  const repos = [];
-  for (let page = 1; page <= 5; page++) {
-    const res = await fetch(`https://api.github.com/orgs/${GH_ORG}/repos?per_page=100&page=${page}&type=public`);
-    if (!res.ok) throw new Error('GitHub API ' + res.status);
-    const batch = await res.json();
-    repos.push(...batch);
-    if (batch.length < 100) break;
-  }
-  return repos;
+  $$('#scopeSeg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.scope === state.scope));
+  $$('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === state.view));
+  $('#sort').value = state.sort;
+  if ($('#q').value !== state.q) $('#q').value = state.q;
+
+  const list = sorted(filtered());
+  const grid = $('#grid');
+  grid.classList.toggle('list', state.view === 'list');
+  const shown = state.all || state.view === 'list' ? list : list.slice(0, PAGE);
+  grid.innerHTML = shown.length ? shown.map(cardHTML).join('')
+    : `<div class="empty">No repositories match. Try another word, switch scope to <b>All</b>, or <button class="clear" data-action="clear">clear filters</button>.</div>`;
+  $('#moreRow').hidden = shown.length >= list.length;
+  $('#moreBtn').textContent = `Show all ${list.length}`;
+
+  const scopeWord = { community: 'community', collected: 'collected', all: '' }[state.scope];
+  $('#resultCount').textContent = `${list.length} ${scopeWord} ${list.length === 1 ? 'repository' : 'repositories'}`.replace(/\s+/g, ' ');
+  const p = PILLARS.find(x => x.code === state.pillar);
+  $('#pillarTag').innerHTML = p ? `<span class="active-pillar">${p.code} · ${esc(p.title)}<button data-action="unpillar" aria-label="Remove pillar filter">×</button></span>` : '';
+  $('#clearBtn').hidden = !(state.q || state.cat !== 'all' || state.pillar || state.scope !== 'community');
+  $('#exploreAside').innerHTML = `${REPOS.length} public repos<br>${state.view} view`;
+  writeURL();
+}
+function set(patch, scroll = false) {
+  Object.assign(state, patch, 'all' in patch ? {} : { all: false });
+  renderExplorer();
+  if (scroll) $('#explore').scrollIntoView({ behavior: 'smooth' });
 }
 
-async function loadGitHubData() {
-  // Serve from session cache when fresh; fall back to a stale cache if the API is unreachable
-  let cached = null;
-  try { cached = JSON.parse(sessionStorage.getItem(GH_CACHE_KEY)); } catch (e) {}
-  let data = cached && Date.now() - cached.t < GH_CACHE_TTL ? cached : null;
+/* ───────── Render: timeline ───────── */
+function renderTimeline() {
+  const recent = [...REPOS].sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at)).slice(0, 10);
+  $('#timeline').innerHTML = recent.map(r => `<li style="--dot:${CATS[r.cat].color}">
+    <div class="when">${ago(r.pushed_at)} · ${CATS[r.cat].label.toLowerCase()}${r.community ? '' : ' · collected'}</div>
+    <a href="${esc(r.html_url)}" target="_blank" rel="noopener">${esc(pretty(r.name))}</a>
+    <div class="what">${esc(r.description || '')}</div></li>`).join('');
+}
 
-  if (!data) {
-    try {
-      const [orgRes, repos] = await Promise.all([
-        fetch(`https://api.github.com/orgs/${GH_ORG}`),
-        fetchAllRepos(),
-      ]);
-      const org = orgRes.ok ? await orgRes.json() : null;
-      data = { t: Date.now(), org, repos };
-      try { sessionStorage.setItem(GH_CACHE_KEY, JSON.stringify(data)); } catch (e) {}
-    } catch (e) {
-      data = cached; // stale is better than nothing
+/* ───────── Render: awesome list (parsed live from README) ───────── */
+async function renderAwesome() {
+  const box = $('#bars');
+  try {
+    const res = await fetch(`https://raw.githubusercontent.com/${ORG}/${AWESOME}/HEAD/README.md`);
+    if (!res.ok) throw new Error(res.status);
+    const md = await res.text();
+    const sections = [];
+    let cur = null;
+    for (const line of md.split('\n')) {
+      const h = /^##\s+(.+?)\s*$/.exec(line);
+      if (h) {
+        const title = h[1].replace(/[*_`]/g, '').replace(/<[^>]+>/g, '').trim();
+        cur = /^(contents|table of contents|contributing|license)$/i.test(title) ? null : { title, n: 0 };
+        if (cur) sections.push(cur);
+        continue;
+      }
+      if (!cur) continue;
+      if (/^\s*[-*+]\s+\S/.test(line)) cur.n++;
+      else if (/^\|/.test(line) && !/^\|[\s:|-]+\|?\s*$/.test(line)) cur.n++; // table rows (header rows included once per table; close enough)
+    }
+    const rows = sections.filter(s => s.n > 0);
+    if (!rows.length) throw new Error('empty');
+    const max = Math.max(...rows.map(s => s.n));
+    const total = rows.reduce((a, s) => a + s.n, 0);
+    bind('awesomeEntries', total);
+    const anchor = t => t.toLowerCase().replace(/[^\w\- ]+/g, '').trim().replace(/\s/g, '-');
+    box.innerHTML = rows.map(s => `<a class="bar" href="https://github.com/${ORG}/${AWESOME}#${anchor(s.title)}" target="_blank" rel="noopener">
+      <span class="bar-name">${esc(s.title)}</span><span class="bar-track"><span class="bar-fill" data-w="${(s.n / max * 100).toFixed(1)}"></span></span><span class="bar-n">${s.n}</span></a>`).join('');
+    requestAnimationFrame(() => requestAnimationFrame(() => $$('.bar-fill', box).forEach(el => el.style.width = el.dataset.w + '%')));
+  } catch (e) {
+    bind('awesomeEntries', '—');
+    box.innerHTML = `<div class="empty">Couldn't read the list right now. <a href="https://github.com/${ORG}/${AWESOME}" target="_blank" rel="noopener">Open it on GitHub ↗</a></div>`;
+  }
+}
+
+/* ───────── Render: people + naming table ───────── */
+function renderPeople(members) {
+  $('#people').innerHTML = (members || []).map(m => `<a class="person" href="${esc(m.html_url)}" target="_blank" rel="noopener">
+    <img src="${esc(m.avatar_url)}&s=96" alt="" width="42" height="42"><span><b>${esc(m.login)}</b><span>public member</span></span></a>`).join('')
+    + `<a class="person" href="https://github.com/orgs/${ORG}/people" target="_blank" rel="noopener" style="padding-left:16px"><span><b>All members ↗</b><span>on GitHub</span></span></a>`;
+  $('#namingBody').innerHTML = CAT_ORDER.map(c => `<tr>
+    <td>${CATS[c].prefix.split(', ').map(p => `<code>${p}</code>`).join(' ')}</td><td>${CATS[c].use}</td>
+    <td>${REPOS.filter(r => r.community && r.cat === c).length}</td></tr>`).join('');
+}
+
+/* ───────── Topographic background ───────── */
+function drawTopo() {
+  const svg = $('#topo');
+  const w = svg.clientWidth || 1200, h = svg.clientHeight || 640;
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const peaks = [[0.82, 0.3, 11], [0.12, 0.85, 8], [0.55, 1.05, 7], [0.98, 0.95, 6]];
+  let paths = '';
+  for (const [px, py, rings] of peaks) {
+    const cx = px * w, cy = py * h, ph = rnd() * 6, ph2 = rnd() * 6;
+    for (let i = 1; i <= rings; i++) {
+      const R = i * Math.min(w, h) * 0.055;
+      let d = '';
+      for (let a = 0; a <= 64; a++) {
+        const t = a / 64 * Math.PI * 2;
+        const rr = R * (1 + 0.13 * Math.sin(3 * t + ph + i * 0.35) + 0.07 * Math.sin(5 * t + ph2 - i * 0.2));
+        d += `${a ? 'L' : 'M'}${(cx + rr * Math.cos(t)).toFixed(1)},${(cy + rr * Math.sin(t) * 0.82).toFixed(1)}`;
+      }
+      paths += `<path d="${d}Z" fill="none" stroke="var(--contour)" stroke-width="${i % 4 === 0 ? 1.6 : 1}"/>`;
     }
   }
-
-  const grid = document.getElementById('repoGrid');
-  if (!data || !data.repos) {
-    grid.innerHTML = `<div class="repo-error">Couldn't reach the GitHub API right now — <a href="https://github.com/${GH_ORG}" target="_blank">browse all repositories on GitHub ↗</a></div>`;
-    return;
-  }
-
-  renderStats(data);
-  renderRepos(data.repos);
+  svg.innerHTML = paths;
 }
 
-function renderStats({ org, repos }) {
-  if (org) {
-    document.getElementById('stat-repos').textContent = org.public_repos;
-    document.getElementById('stat-followers').textContent = org.followers;
+/* ───────── Events ───────── */
+document.addEventListener('click', e => {
+  const home = e.target.closest('[data-home]');
+  if (home) { e.preventDefault(); window.open(home.dataset.home, '_blank', 'noopener'); return; }
+  const t = e.target.closest('[data-cat],[data-scope],[data-view],[data-pillar],[data-action]');
+  if (!t) return;
+  const inExplorer = t.closest('#explore');
+  if (t.dataset.action === 'clear') { e.preventDefault(); return set({ q: '', cat: 'all', pillar: null, scope: 'community' }); }
+  if (t.dataset.action === 'unpillar') return set({ pillar: null });
+  if (t.dataset.pillar) return set({ pillar: t.dataset.pillar, cat: 'all', scope: 'all' }, true);
+  if (t.dataset.view) { try { localStorage.setItem('agai-view', t.dataset.view); } catch (e) {} return set({ view: t.dataset.view }); }
+  if (t.dataset.scope && !t.dataset.cat) { if (!inExplorer) e.preventDefault(); return set({ scope: t.dataset.scope, cat: 'all' }, !inExplorer); }
+  if (t.dataset.cat) { if (!inExplorer) e.preventDefault(); return set(inExplorer ? { cat: t.dataset.cat } : { cat: t.dataset.cat, scope: 'community', pillar: null }, !inExplorer); }
+});
+let qTimer;
+$('#q').addEventListener('input', e => { clearTimeout(qTimer); qTimer = setTimeout(() => set({ q: e.target.value.trim() }), 120); });
+$('#sort').addEventListener('change', e => set({ sort: e.target.value }));
+$('#moreBtn').addEventListener('click', () => set({ all: true }));
+$('#clearBtn').addEventListener('click', () => set({ q: '', cat: 'all', pillar: null, scope: 'community' }));
+$('#shareBtn').addEventListener('click', async () => {
+  const url = location.origin + location.pathname + location.search + '#explore';
+  try { await navigator.clipboard.writeText(url); toast('Link copied'); } catch (e) { toast(url); }
+});
+function focusSearch() { $('#explore').scrollIntoView({ behavior: 'smooth' }); setTimeout(() => $('#q').focus({ preventScroll: true }), 350); }
+$('#searchJump').addEventListener('click', focusSearch);
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && !/input|textarea|select/i.test(document.activeElement.tagName)) { e.preventDefault(); focusSearch(); }
+  if (e.key === 'Escape' && document.activeElement === $('#q')) { set({ q: '' }); $('#q').blur(); }
+});
+$('#themeBtn').addEventListener('click', () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('agai-theme', root.dataset.theme); } catch (e) {}
+});
+// highlight the nav link of the section in view
+const navObs = new IntersectionObserver(entries => entries.forEach(en => {
+  if (en.isIntersecting) $$('.nav-links a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + en.target.id));
+}), { rootMargin: '-45% 0px -50% 0px' });
+['start', 'focus', 'explore', 'pulse', 'community'].forEach(id => navObs.observe(document.getElementById(id)));
+let topoTimer; addEventListener('resize', () => { clearTimeout(topoTimer); topoTimer = setTimeout(drawTopo, 200); });
+
+/* ───────── Boot ───────── */
+(async function boot() {
+  drawTopo();
+  readURL();
+  renderAwesome();
+  try {
+    const data = await loadData();
+    REPOS = data.repos.filter(r => !isHidden(r)).map(r => ({ ...r, cat: categorize(r), community: isCommunity(r), hay: haystack(r) }));
+    renderDashboard(data);
+    renderPillars();
+    renderExplorer();
+    renderTimeline();
+    renderPeople(data.members);
+  } catch (e) {
+    $('#grid').innerHTML = `<div class="empty">Couldn't load repositories. <a href="https://github.com/${ORG}" target="_blank" rel="noopener">Browse them on GitHub ↗</a></div>`;
+    $('#dataSrc').textContent = 'offline';
   }
-  const awesome = repos.find(r => r.name === 'awesome-autonomous-geoai');
-  if (awesome) {
-    const s = awesome.stargazers_count;
-    document.getElementById('stat-awesome-stars').textContent = s + '★';
-    document.getElementById('btn-awesome').textContent = 'Awesome List ★' + s;
-    document.getElementById('section-awesome-stars').textContent = '★' + s;
-  }
-}
-
-function renderRepos(allRepos) {
-  const repos = allRepos
-    .filter(r => !isHiddenRepo(r) && !r.archived)
-    .sort((a, b) => (b.stargazers_count - a.stargazers_count) || (new Date(b.pushed_at) - new Date(a.pushed_at)));
-
-  // Group in category order so the "All" view reads papers → tutorials → projects → tools → resources
-  const byCat = {};
-  repos.forEach(r => { const c = categorize(r); (byCat[c] = byCat[c] || []).push(r); });
-  const ordered = CAT_ORDER.flatMap(c => byCat[c] || []);
-
-  const grid = document.getElementById('repoGrid');
-  grid.innerHTML = ordered.map(repoCardHtml).join('');
-
-  // Tab counts
-  document.querySelectorAll('.tab').forEach(btn => {
-    const m = /'(\w+)'/.exec(btn.getAttribute('onclick'));
-    if (!m) return;
-    const count = m[1] === 'all' ? ordered.length : (byCat[m[1]] || []).length;
-    btn.textContent = btn.textContent.replace(/\s*\(\d+\)$/, '') + ` (${count})`;
-  });
-
-  // Hook the newly created cards into the scroll-reveal observer
-  grid.querySelectorAll('.repo-card').forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 6) * 0.07}s`;
-    observer.observe(el);
-  });
-
-  const subEl = document.querySelector('.repos .section-sub');
-  if (subEl) subEl.textContent = ordered.length + ' repositories spanning papers, tutorials, projects, and tools — live from GitHub';
-}
-
-loadGitHubData();
-
-// ── TYPEWRITER effect for hero ──
-const heroLine2 = document.querySelector('.hero h1 .line2');
-const text = 'for Science';
-let idx = 0;
-heroLine2.textContent = '';
-function type() {
-  if (idx < text.length) {
-    heroLine2.textContent += text[idx++];
-    setTimeout(type, 80);
-  }
-}
-setTimeout(type, 600);
+})();
 </script>
 </body>
 </html>
