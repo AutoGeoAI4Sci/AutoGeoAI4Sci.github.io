@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-26T15:27:53Z",
+  "generated": "2026-11-26T15:41:08Z",
   "org": {
     "followers": 34,
     "public_repos": 68
@@ -19,6 +19,60 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/102897487?v=4",
       "html_url": "https://github.com/Wenjing0916",
       "login": "Wenjing0916"
+    }
+  ],
+  "awesome": [
+    {
+      "title": "Books",
+      "n": 7
+    },
+    {
+      "title": "Conferences",
+      "n": 42
+    },
+    {
+      "title": "Education",
+      "n": 24
+    },
+    {
+      "title": "Research Groups",
+      "n": 28
+    },
+    {
+      "title": "Journals",
+      "n": 11
+    },
+    {
+      "title": "Selected Papers",
+      "n": 3
+    },
+    {
+      "title": "Software",
+      "n": 22
+    },
+    {
+      "title": "Datasets and Data Sources",
+      "n": 14
+    },
+    {
+      "title": "Internship and Company",
+      "n": 263
+    },
+    {
+      "title": "Postdoc Opportunities",
+      "n": 128
+    },
+    {
+      "title": "Miscellaneous",
+      "n": 13
+    },
+    {
+      "title": "Relevant Awesome Lists",
+      "n": 4
+    },
+    {
+      "title": "Funding and Grants",
+      "n": 2
     }
   ],
   "repos": [
@@ -78,7 +132,7 @@
       "html_url": "https://github.com/AutoGeoAI4Sci/.github",
       "language": null,
       "name": ".github",
-      "pushed_at": "2026-02-24T02:37:13Z",
+      "pushed_at": "2026-11-26T15:34:21Z",
       "stargazers_count": 0,
       "topics": []
     },
@@ -366,7 +420,7 @@
       "html_url": "https://github.com/AutoGeoAI4Sci/AutoGeoAI4Sci.github.io",
       "language": "HTML",
       "name": "AutoGeoAI4Sci.github.io",
-      "pushed_at": "2026-11-26T15:27:38Z",
+      "pushed_at": "2026-11-26T15:34:26Z",
       "stargazers_count": 0,
       "topics": []
     },

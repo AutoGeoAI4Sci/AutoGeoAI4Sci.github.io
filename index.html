@@ -20,7 +20,9 @@
 <meta name="twitter:image" content="https://autogeoai4sci.github.io/assets/og-image.jpg">
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%2214%22 fill=%22none%22 stroke=%22%232451b3%22 stroke-width=%223%22/><circle cx=%2216%22 cy=%2216%22 r=%228%22 fill=%22none%22 stroke=%22%232451b3%22 stroke-width=%222%22/><circle cx=%2216%22 cy=%2216%22 r=%223%22 fill=%22%23c2410c%22/></svg>">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="canonical" href="https://autogeoai4sci.github.io/">
 <script type="application/ld+json">
 {
@@ -29,7 +31,7 @@
   "name": "AutonomousGeoAI4Science",
   "alternateName": "AutoGeoAI4Sci",
   "url": "https://autogeoai4sci.github.io/",
-  "logo": "https://autogeoai4sci.github.io/assets/og-image.jpg",
+  "logo": "https://autogeoai4sci.github.io/assets/logo.png",
   "description": "An open research and learning community advancing autonomous geospatial AI: tutorials, research code, papers, and tools at the intersection of AI, GeoAI, and scientific discovery.",
   "sameAs": ["https://github.com/AutoGeoAI4Sci"]
 }
@@ -125,7 +127,9 @@ button, input, select { font: inherit; color: inherit; }
 }
 .nav-inner { display: flex; align-items: center; gap: 20px; height: 60px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; white-space: nowrap; }
-.brand svg { width: 26px; height: 26px; flex: none; }
+.brand img { width: 34px; height: 34px; flex: none; border-radius: 9px; background: #000; box-shadow: 0 1px 2px rgba(17,24,39,0.12); }
+.foot-brand { display: inline-flex; align-items: center; gap: 10px; }
+.foot-brand img { width: 26px; height: 26px; border-radius: 7px; background: #000; }
 .brand small { font-family: var(--mono); font-weight: 400; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.04em; }
 .nav-links { display: flex; gap: 2px; margin-left: auto; }
 .nav-links a { text-decoration: none; font-size: 0.88rem; color: var(--ink-2); padding: 6px 10px; border-radius: 8px; }
@@ -363,7 +367,7 @@ footer { border-top: 1px solid var(--line); padding: 34px 0 40px; font-size: 0.8
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#top" aria-label="AutoGeoAI4Sci home">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="var(--accent)" stroke-width="2.5"/><path d="M4 16c4-5 8-5 12 0s8 5 12 0" fill="none" stroke="var(--accent)" stroke-width="1.6"/><circle cx="16" cy="16" r="3.2" fill="var(--coral)"/></svg>
+      <img src="assets/favicon-64.png" alt="" width="34" height="34">
       AutoGeoAI4Sci <small>EST. 2026</small>
     </a>
     <nav class="nav-links" aria-label="Sections">
@@ -595,7 +599,7 @@ footer { border-top: 1px solid var(--line); padding: 34px 0 40px; font-size: 0.8
 
 <footer>
   <div class="wrap foot">
-    <span>MIT License · AutonomousGeoAI4Science · <span id="footData"></span></span>
+    <span class="foot-brand"><img src="assets/favicon-64.png" alt="" width="26" height="26"><span>MIT License · AutonomousGeoAI4Science · <span id="footData"></span></span></span>
     <nav aria-label="Footer">
       <a href="https://github.com/AutoGeoAI4Sci" target="_blank" rel="noopener">GitHub</a>
       <a href="https://github.com/AutoGeoAI4Sci/awesome-autonomous-geoai" target="_blank" rel="noopener">Awesome list</a>
@@ -741,7 +745,7 @@ function renderDashboard(data) {
 
   const when = new Date(data.t).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
   $('#dataSrc').textContent = data.src === 'snapshot' ? `snapshot · ${when}` : `live · ${when}`;
-  $('#footData').textContent = `repo data ${data.src} as of ${when}`;
+  $('#footData').textContent = `repo data ${data.src} as of ${when} · backup snapshot refreshed monthly`;
 }
 
 /* ───────── Render: pillars ───────── */
@@ -850,6 +854,25 @@ function renderTimeline() {
 async function renderAwesome() {
   const box = $('#bars');
   try {
+    let rows;
+    try { rows = await awesomeSectionsLive(); }
+    catch (e) { rows = (await fetchJSON('data/snapshot.json')).awesome || []; } // monthly snapshot fallback
+    if (!rows.length) throw new Error('empty');
+    const max = Math.max(...rows.map(s => s.n));
+    const total = rows.reduce((a, s) => a + s.n, 0);
+    bind('awesomeEntries', total);
+    const anchor = t => t.toLowerCase().replace(/[^\w\- ]+/g, '').trim().replace(/\s/g, '-');
+    box.innerHTML = rows.map(s => `<a class="bar" href="https://github.com/${ORG}/${AWESOME}#${anchor(s.title)}" target="_blank" rel="noopener">
+      <span class="bar-name">${esc(s.title)}</span><span class="bar-track"><span class="bar-fill" data-w="${(s.n / max * 100).toFixed(1)}"></span></span><span class="bar-n">${s.n}</span></a>`).join('');
+    requestAnimationFrame(() => requestAnimationFrame(() => $$('.bar-fill', box).forEach(el => el.style.width = el.dataset.w + '%')));
+  } catch (e) {
+    bind('awesomeEntries', '—');
+    box.innerHTML = `<div class="empty">Couldn't read the list right now. <a href="https://github.com/${ORG}/${AWESOME}" target="_blank" rel="noopener">Open it on GitHub ↗</a></div>`;
+  }
+}
+// Same counting rules as scripts/snapshot.sh; keep the two in sync.
+async function awesomeSectionsLive() {
+  {
     const res = await fetch(`https://raw.githubusercontent.com/${ORG}/${AWESOME}/HEAD/README.md`);
     if (!res.ok) throw new Error(res.status);
     const md = await res.text();
@@ -869,16 +892,7 @@ async function renderAwesome() {
     }
     const rows = sections.filter(s => s.n > 0);
     if (!rows.length) throw new Error('empty');
-    const max = Math.max(...rows.map(s => s.n));
-    const total = rows.reduce((a, s) => a + s.n, 0);
-    bind('awesomeEntries', total);
-    const anchor = t => t.toLowerCase().replace(/[^\w\- ]+/g, '').trim().replace(/\s/g, '-');
-    box.innerHTML = rows.map(s => `<a class="bar" href="https://github.com/${ORG}/${AWESOME}#${anchor(s.title)}" target="_blank" rel="noopener">
-      <span class="bar-name">${esc(s.title)}</span><span class="bar-track"><span class="bar-fill" data-w="${(s.n / max * 100).toFixed(1)}"></span></span><span class="bar-n">${s.n}</span></a>`).join('');
-    requestAnimationFrame(() => requestAnimationFrame(() => $$('.bar-fill', box).forEach(el => el.style.width = el.dataset.w + '%')));
-  } catch (e) {
-    bind('awesomeEntries', '—');
-    box.innerHTML = `<div class="empty">Couldn't read the list right now. <a href="https://github.com/${ORG}/${AWESOME}" target="_blank" rel="noopener">Open it on GitHub ↗</a></div>`;
+    return rows;
   }
 }
 

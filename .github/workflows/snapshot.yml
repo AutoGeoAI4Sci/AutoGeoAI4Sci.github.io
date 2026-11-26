@@ -1,11 +1,13 @@
-name: Refresh repo snapshot
+name: Monthly site update
+# Runs at 06:00 UTC on the 1st of every month (and on demand from the Actions tab).
+# Refreshes data/snapshot.json: repos, org stats, members, and awesome-list section counts.
 on:
-  schedule: [{ cron: '0 6 * * *' }]
+  schedule: [{ cron: '0 6 1 * *' }]
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
-  snapshot:
+  update:
     runs-on: ubuntu-latest
     defaults: { run: { shell: bash } }
     steps:
@@ -13,10 +15,12 @@ jobs:
       - run: ./scripts/snapshot.sh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Commit if changed
+      # Always commit, even when only the timestamp moved: GitHub disables scheduled
+      # workflows in repos with no activity for 60 days, and a monthly commit keeps this one alive.
+      - name: Commit monthly snapshot
         run: |
-          # ignore the timestamp; commit only when repos, org stats, or members changed
-          if diff <(git show HEAD:data/snapshot.json | jq -S 'del(.generated)') <(jq -S 'del(.generated)' data/snapshot.json) >/dev/null; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git commit -am "Refresh repo snapshot" && git push
+          git add data/snapshot.json
+          git commit -m "Monthly site update: $(date -u +%Y-%m)" || exit 0
+          git push
